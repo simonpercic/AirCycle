@@ -1,0 +1,80 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'si.dlabs.soter'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId 'com.github.simonpercic.aircycle'
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode 1
+        versionName '1.0'
+
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+
+    signingConfigs {
+        release.initWith(signingConfigs.debug)
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            useProguard true
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        textReport true
+        warningsAsErrors true
+        lintConfig file('../config/check/lint.xml')
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+ext.butterknifeVersion = '8.2.1'
+
+dependencies {
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile 'com.jakewharton.timber:timber:4.2.0'
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    // Static code rules
+    checkstyleRules files('../config/check/checkstyle.xml')
+    findbugsRules files('../config/check/findbugs.xml')
+    pmdRules files('../config/check/pmd.xml')
+}
+
+soter {
+    findbugs {
+        reportLevel 'high'
+    }
+}

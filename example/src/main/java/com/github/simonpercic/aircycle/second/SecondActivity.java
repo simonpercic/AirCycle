@@ -1,9 +1,12 @@
-package com.github.simonpercic.aircycle;
+package com.github.simonpercic.aircycle.second;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.github.simonpercic.aircycle.ActivityLifecycleLogger;
+import com.github.simonpercic.aircycle.R;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>

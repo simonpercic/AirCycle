@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".FirstActivity">
+        <activity android:name=".first.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SecondActivity" />
+        <activity android:name=".second.SecondActivity" />
     </application>
 
 </manifest>

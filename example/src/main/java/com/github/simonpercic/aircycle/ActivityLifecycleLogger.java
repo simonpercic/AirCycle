@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import timber.log.Timber;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public class ActivityLifecycleLogger implements ActivityLifecycleCallbacks {
 
     @Override public void onActivityCreated(Activity activity, Bundle bundle) {

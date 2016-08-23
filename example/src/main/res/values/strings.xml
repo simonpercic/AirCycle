@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AirCycle</string>
+    <string name="app_name">AirCycle Example</string>
+
+    <string name="first_activity">First Activity</string>
+    <string name="second_activity">Second Activity</string>
+    <string name="btn_open_second_activity">Open second Activity</string>
 </resources>

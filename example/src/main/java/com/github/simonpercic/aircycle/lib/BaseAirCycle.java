@@ -3,6 +3,7 @@ package com.github.simonpercic.aircycle.lib;
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
@@ -10,11 +11,10 @@ import android.os.Bundle;
 public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecycleCallbacks {
 
     private final T tActivity;
-    private final CancelableHandler handler;
+    @Nullable private CancelableHandler handler;
 
     protected BaseAirCycle(T tActivity) {
         this.tActivity = tActivity;
-        this.handler = new CancelableHandler();
     }
 
     @Override public void onActivityCreated(Activity activity, final Bundle bundle) {
@@ -23,6 +23,10 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         }
 
         if (getCallbacks(tActivity) == null) {
+            if (handler == null) {
+                handler = new CancelableHandler();
+            }
+
             handler.post(new Runnable() {
                 @Override public void run() {
                     if (getCallbacks(tActivity) != null) {
@@ -42,7 +46,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
-        if (handler.isScheduled()) {
+        if (handler != null && handler.isScheduled()) {
             handler.post(new Runnable() {
                 @Override public void run() {
                     if (getCallbacks(tActivity) != null) {
@@ -62,7 +66,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
-        if (handler.isScheduled()) {
+        if (handler != null && handler.isScheduled()) {
             handler.post(new Runnable() {
                 @Override public void run() {
                     if (getCallbacks(tActivity) != null) {
@@ -116,8 +120,9 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             getCallbacks(tActivity).onActivityDestroyed(tActivity);
         }
 
-        if (tActivity.isFinishing()) {
-            tActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
+        tActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
+
+        if (handler != null) {
             handler.cancel();
         }
     }

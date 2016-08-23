@@ -15,10 +15,11 @@ import butterknife.OnClick;
  */
 public class FirstActivity extends AppCompatActivity {
 
-    private ActivityLifecycleLogger lifecycleLogger;
+    ActivityLifecycleLogger lifecycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TestFirstActivityAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         ButterKnife.bind(this);

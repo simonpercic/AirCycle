@@ -13,10 +13,11 @@ import com.github.simonpercic.aircycle.R;
  */
 public class SecondActivity extends AppCompatActivity {
 
-    private final ActivityLifecycleLogger lifecycleLogger = new ActivityLifecycleLogger();
+    final ActivityLifecycleLogger lifecycleLogger = new ActivityLifecycleLogger();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TestSecondActivityAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
     }

@@ -2,6 +2,9 @@ package com.github.simonpercic.aircycle.lib;
 
 import android.os.Bundle;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public interface ActivityBundleAirCycle {
 
     void onCreate(Bundle savedInstanceState);

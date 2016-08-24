@@ -6,6 +6,9 @@ import com.github.simonpercic.aircycle.lib.ActivityBundleAirCycle;
 
 import timber.log.Timber;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public class ActivityBundleAirCycleLogger implements ActivityBundleAirCycle {
 
     @Override public void onCreate(Bundle savedInstanceState) {

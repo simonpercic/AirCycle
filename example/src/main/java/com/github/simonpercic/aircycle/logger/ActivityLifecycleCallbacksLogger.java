@@ -9,7 +9,7 @@ import timber.log.Timber;
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class ActivityLifecycleLogger implements ActivityLifecycleCallbacks {
+public class ActivityLifecycleCallbacksLogger implements ActivityLifecycleCallbacks {
 
     @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         Timber.d("onActivityCreated: %s | savedInstanceState: %s", activity, savedInstanceState);

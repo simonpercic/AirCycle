@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.activity.first;
+package com.github.simonpercic.aircycle.activity.a1;
 
 import android.os.Bundle;
 
@@ -14,31 +14,31 @@ public class TestFirstActivityAirCycle extends BaseAirCycle<FirstActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(FirstActivity activity, Bundle savedInstanceState) {
-        activity.lifecycleLogger.onActivityCreated(activity, savedInstanceState);
+        activity.lifecycleLogger.onCreate();
     }
 
     @Override protected void notifyOnActivityStarted(FirstActivity activity) {
-        activity.lifecycleLogger.onActivityStarted(activity);
+        activity.lifecycleLogger.onStart();
     }
 
     @Override protected void notifyOnActivityResumed(FirstActivity activity) {
-        activity.lifecycleLogger.onActivityResumed(activity);
+        activity.lifecycleLogger.onResume();
     }
 
     @Override protected void notifyOnActivityPaused(FirstActivity activity) {
-        activity.lifecycleLogger.onActivityPaused(activity);
+        activity.lifecycleLogger.onPause();
     }
 
     @Override protected void notifyOnActivityStopped(FirstActivity activity) {
-        activity.lifecycleLogger.onActivityStopped(activity);
+        activity.lifecycleLogger.onStop();
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(FirstActivity activity, Bundle outState) {
-        activity.lifecycleLogger.onActivitySaveInstanceState(activity, outState);
+        activity.lifecycleLogger.onSaveInstanceState();
     }
 
     @Override protected void notifyOnActivityDestroyed(FirstActivity activity) {
-        activity.lifecycleLogger.onActivityDestroyed(activity);
+        activity.lifecycleLogger.onDestroy();
     }
 
     static void bind(FirstActivity activity) {

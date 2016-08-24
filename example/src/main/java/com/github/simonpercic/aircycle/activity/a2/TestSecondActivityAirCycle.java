@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.activity.second;
+package com.github.simonpercic.aircycle.activity.a2;
 
 import android.os.Bundle;
 
@@ -14,31 +14,31 @@ public class TestSecondActivityAirCycle extends BaseAirCycle<SecondActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(SecondActivity activity, Bundle savedInstanceState) {
-        activity.lifecycleLogger.onActivityCreated(activity, savedInstanceState);
+        activity.lifecycleLogger.onCreate(savedInstanceState);
     }
 
     @Override protected void notifyOnActivityStarted(SecondActivity activity) {
-        activity.lifecycleLogger.onActivityStarted(activity);
+        activity.lifecycleLogger.onStart();
     }
 
     @Override protected void notifyOnActivityResumed(SecondActivity activity) {
-        activity.lifecycleLogger.onActivityResumed(activity);
+        activity.lifecycleLogger.onResume();
     }
 
     @Override protected void notifyOnActivityPaused(SecondActivity activity) {
-        activity.lifecycleLogger.onActivityPaused(activity);
+        activity.lifecycleLogger.onPause();
     }
 
     @Override protected void notifyOnActivityStopped(SecondActivity activity) {
-        activity.lifecycleLogger.onActivityStopped(activity);
+        activity.lifecycleLogger.onStop();
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(SecondActivity activity, Bundle outState) {
-        activity.lifecycleLogger.onActivitySaveInstanceState(activity, outState);
+        activity.lifecycleLogger.onSaveInstanceState(outState);
     }
 
     @Override protected void notifyOnActivityDestroyed(SecondActivity activity) {
-        activity.lifecycleLogger.onActivityDestroyed(activity);
+        activity.lifecycleLogger.onDestroy();
     }
 
     static void bind(SecondActivity activity) {

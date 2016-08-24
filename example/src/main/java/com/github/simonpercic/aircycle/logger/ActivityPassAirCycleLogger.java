@@ -7,6 +7,9 @@ import com.github.simonpercic.aircycle.lib.ActivityPassAirCycle;
 
 import timber.log.Timber;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public class ActivityPassAirCycleLogger<T extends Activity> implements ActivityPassAirCycle<T> {
 
     @Override public void onCreate(T activity, Bundle savedInstanceState) {

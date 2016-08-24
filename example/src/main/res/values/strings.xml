@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">AirCycle Example</string>
 
-    <string name="first_activity">First Activity</string>
-    <string name="second_activity">Second Activity</string>
-    <string name="btn_open_second_activity">Open second Activity</string>
+    <string name="first_activity">1st Activity</string>
+    <string name="second_activity">2nd Activity</string>
+    <string name="third_activity">3rd Activity</string>
+    <string name="fourth_activity">4th Activity</string>
 </resources>

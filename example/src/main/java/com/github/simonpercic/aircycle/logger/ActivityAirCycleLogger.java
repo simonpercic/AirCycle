@@ -4,6 +4,9 @@ import com.github.simonpercic.aircycle.lib.ActivityAirCycle;
 
 import timber.log.Timber;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public class ActivityAirCycleLogger implements ActivityAirCycle {
 
     @Override public void onCreate() {

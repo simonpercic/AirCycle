@@ -1,5 +1,8 @@
 package com.github.simonpercic.aircycle.lib;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public interface ActivityAirCycle {
 
     void onCreate();

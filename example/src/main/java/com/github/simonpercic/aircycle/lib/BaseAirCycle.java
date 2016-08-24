@@ -21,7 +21,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
 
     // region ActivityLifecycleCallbacks
 
-    @Override public void onActivityCreated(Activity activity, final Bundle bundle) {
+    @Override public void onActivityCreated(Activity activity, final Bundle savedInstanceState) {
         if (activity != tActivity) {
             return;
         }
@@ -32,7 +32,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
 
         handler.post(new Runnable() {
             @Override public void run() {
-                notifyOnActivityCreated(tActivity, bundle);
+                notifyOnActivityCreated(tActivity, savedInstanceState);
             }
         });
     }
@@ -89,14 +89,14 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         notifyOnActivityStopped(tActivity);
     }
 
-    @Override public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+    @Override public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
         if (activity != tActivity) {
             return;
         }
 
         cancelHandler();
 
-        notifyOnActivitySaveInstanceState(tActivity, bundle);
+        notifyOnActivitySaveInstanceState(tActivity, outState);
     }
 
     @Override public void onActivityDestroyed(Activity activity) {
@@ -114,7 +114,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
     // endregion ActivityLifecycleCallbacks
 
     @SuppressWarnings(UNUSED_PARAMETERS)
-    protected void notifyOnActivityCreated(T activity, Bundle bundle) {
+    protected void notifyOnActivityCreated(T activity, Bundle savedInstanceState) {
 
     }
 
@@ -139,7 +139,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
     }
 
     @SuppressWarnings(UNUSED_PARAMETERS)
-    protected void notifyOnActivitySaveInstanceState(T activity, Bundle bundle) {
+    protected void notifyOnActivitySaveInstanceState(T activity, Bundle outState) {
 
     }
 

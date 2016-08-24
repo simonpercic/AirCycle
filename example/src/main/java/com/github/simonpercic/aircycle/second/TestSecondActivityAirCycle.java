@@ -13,8 +13,8 @@ public class TestSecondActivityAirCycle extends BaseAirCycle<SecondActivity> {
         super(tActivity);
     }
 
-    @Override protected void notifyOnActivityCreated(SecondActivity activity, Bundle bundle) {
-        activity.lifecycleLogger.onActivityCreated(activity, bundle);
+    @Override protected void notifyOnActivityCreated(SecondActivity activity, Bundle savedInstanceState) {
+        activity.lifecycleLogger.onActivityCreated(activity, savedInstanceState);
     }
 
     @Override protected void notifyOnActivityStarted(SecondActivity activity) {
@@ -33,8 +33,8 @@ public class TestSecondActivityAirCycle extends BaseAirCycle<SecondActivity> {
         activity.lifecycleLogger.onActivityStopped(activity);
     }
 
-    @Override protected void notifyOnActivitySaveInstanceState(SecondActivity activity, Bundle bundle) {
-        activity.lifecycleLogger.onActivitySaveInstanceState(activity, bundle);
+    @Override protected void notifyOnActivitySaveInstanceState(SecondActivity activity, Bundle outState) {
+        activity.lifecycleLogger.onActivitySaveInstanceState(activity, outState);
     }
 
     @Override protected void notifyOnActivityDestroyed(SecondActivity activity) {

@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
  */
 public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecycleCallbacks {
 
+    private static final String UNUSED_PARAMETERS = "UnusedParameters";
+
     private final T tActivity;
     @Nullable private CancelableHandler handler;
 
@@ -17,28 +19,22 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         this.tActivity = tActivity;
     }
 
+    // region ActivityLifecycleCallbacks
+
     @Override public void onActivityCreated(Activity activity, final Bundle bundle) {
         if (activity != tActivity) {
             return;
         }
 
-        if (getCallbacks(tActivity) == null) {
-            if (handler == null) {
-                handler = new CancelableHandler();
-            }
-
-            handler.post(new Runnable() {
-                @Override public void run() {
-                    if (getCallbacks(tActivity) != null) {
-                        getCallbacks(tActivity).onActivityCreated(tActivity, bundle);
-                    }
-                }
-            });
-        } else {
-            if (getCallbacks(tActivity) != null) {
-                getCallbacks(tActivity).onActivityCreated(tActivity, bundle);
-            }
+        if (handler == null) {
+            handler = new CancelableHandler();
         }
+
+        handler.post(new Runnable() {
+            @Override public void run() {
+                notifyOnActivityCreated(tActivity, bundle);
+            }
+        });
     }
 
     @Override public void onActivityStarted(Activity activity) {
@@ -49,15 +45,11 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         if (handler != null && handler.isScheduled()) {
             handler.post(new Runnable() {
                 @Override public void run() {
-                    if (getCallbacks(tActivity) != null) {
-                        getCallbacks(tActivity).onActivityStarted(tActivity);
-                    }
+                    notifyOnActivityStarted(tActivity);
                 }
             });
         } else {
-            if (getCallbacks(tActivity) != null) {
-                getCallbacks(tActivity).onActivityStarted(tActivity);
-            }
+            notifyOnActivityStarted(tActivity);
         }
     }
 
@@ -69,15 +61,11 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         if (handler != null && handler.isScheduled()) {
             handler.post(new Runnable() {
                 @Override public void run() {
-                    if (getCallbacks(tActivity) != null) {
-                        getCallbacks(tActivity).onActivityResumed(tActivity);
-                    }
+                    notifyOnActivityResumed(tActivity);
                 }
             });
         } else {
-            if (getCallbacks(tActivity) != null) {
-                getCallbacks(tActivity).onActivityResumed(tActivity);
-            }
+            notifyOnActivityResumed(tActivity);
         }
     }
 
@@ -86,9 +74,9 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
-        if (getCallbacks(tActivity) != null) {
-            getCallbacks(tActivity).onActivityPaused(tActivity);
-        }
+        cancelHandler();
+
+        notifyOnActivityPaused(tActivity);
     }
 
     @Override public void onActivityStopped(Activity activity) {
@@ -96,19 +84,19 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
-        if (getCallbacks(tActivity) != null) {
-            getCallbacks(tActivity).onActivityStopped(tActivity);
-        }
+        cancelHandler();
+
+        notifyOnActivityStopped(tActivity);
     }
 
-    @Override public void onActivitySaveInstanceState(Activity activity, final Bundle bundle) {
+    @Override public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
         if (activity != tActivity) {
             return;
         }
 
-        if (getCallbacks(tActivity) != null) {
-            getCallbacks(tActivity).onActivitySaveInstanceState(tActivity, bundle);
-        }
+        cancelHandler();
+
+        notifyOnActivitySaveInstanceState(tActivity, bundle);
     }
 
     @Override public void onActivityDestroyed(Activity activity) {
@@ -116,18 +104,55 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
-        if (getCallbacks(tActivity) != null) {
-            getCallbacks(tActivity).onActivityDestroyed(tActivity);
-        }
+        cancelHandler();
+
+        notifyOnActivityDestroyed(tActivity);
 
         tActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
+    }
 
+    // endregion ActivityLifecycleCallbacks
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivityCreated(T activity, Bundle bundle) {
+
+    }
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivityStarted(T activity) {
+
+    }
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivityResumed(T activity) {
+
+    }
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivityPaused(T activity) {
+
+    }
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivityStopped(T activity) {
+
+    }
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivitySaveInstanceState(T activity, Bundle bundle) {
+
+    }
+
+    @SuppressWarnings(UNUSED_PARAMETERS)
+    protected void notifyOnActivityDestroyed(T activity) {
+
+    }
+
+    private void cancelHandler() {
         if (handler != null) {
             handler.cancel();
         }
     }
-
-    protected abstract ActivityLifecycleCallbacks getCallbacks(T activity);
 
     protected void registerCallbacks() {
         tActivity.getApplication().registerActivityLifecycleCallbacks(this);

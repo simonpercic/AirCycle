@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".first.FirstActivity">
+    tools:context=".activity.first.FirstActivity">
 
     <TextView
         style="@style/TextAppearance.AppCompat.Large"

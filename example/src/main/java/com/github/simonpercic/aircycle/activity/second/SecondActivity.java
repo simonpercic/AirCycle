@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.second;
+package com.github.simonpercic.aircycle.activity.second;
 
 import android.content.Context;
 import android.content.Intent;

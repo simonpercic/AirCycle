@@ -1,11 +1,11 @@
-package com.github.simonpercic.aircycle.first;
+package com.github.simonpercic.aircycle.activity.first;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.github.simonpercic.aircycle.logger.ActivityLifecycleLogger;
 import com.github.simonpercic.aircycle.R;
-import com.github.simonpercic.aircycle.second.SecondActivity;
+import com.github.simonpercic.aircycle.activity.second.SecondActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

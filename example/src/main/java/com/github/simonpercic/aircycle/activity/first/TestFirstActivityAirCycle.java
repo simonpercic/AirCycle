@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.first;
+package com.github.simonpercic.aircycle.activity.first;
 
 import android.os.Bundle;
 

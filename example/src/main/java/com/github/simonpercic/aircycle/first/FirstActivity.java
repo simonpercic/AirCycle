@@ -3,7 +3,7 @@ package com.github.simonpercic.aircycle.first;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.github.simonpercic.aircycle.ActivityLifecycleLogger;
+import com.github.simonpercic.aircycle.logger.ActivityLifecycleLogger;
 import com.github.simonpercic.aircycle.R;
 import com.github.simonpercic.aircycle.second.SecondActivity;
 

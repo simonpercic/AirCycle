@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle;
+package com.github.simonpercic.aircycle.logger;
 
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
@@ -11,8 +11,8 @@ import timber.log.Timber;
  */
 public class ActivityLifecycleLogger implements ActivityLifecycleCallbacks {
 
-    @Override public void onActivityCreated(Activity activity, Bundle bundle) {
-        Timber.d("onActivityCreated: %s", activity);
+    @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        Timber.d("onActivityCreated: %s | savedInstanceState: %s", activity, savedInstanceState);
     }
 
     @Override public void onActivityStarted(Activity activity) {
@@ -31,8 +31,8 @@ public class ActivityLifecycleLogger implements ActivityLifecycleCallbacks {
         Timber.d("onActivityStopped: %s", activity);
     }
 
-    @Override public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-        Timber.d("onActivitySaveInstanceState: %s", activity);
+    @Override public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+        Timber.d("onActivitySaveInstanceState: %s | outState: %s", activity, outState);
     }
 
     @Override public void onActivityDestroyed(Activity activity) {

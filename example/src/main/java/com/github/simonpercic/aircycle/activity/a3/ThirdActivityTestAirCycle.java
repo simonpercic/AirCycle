@@ -14,44 +14,44 @@ public class ThirdActivityTestAirCycle extends BaseAirCycle<ThirdActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(ThirdActivity activity, Bundle savedInstanceState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onCreate(activity, savedInstanceState);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onCreate(activity, savedInstanceState);
         }
     }
 
     @Override protected void notifyOnActivityStarted(ThirdActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onStart(activity);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onStart(activity);
         }
     }
 
     @Override protected void notifyOnActivityResumed(ThirdActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onResume(activity);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onResume(activity);
         }
     }
 
     @Override protected void notifyOnActivityPaused(ThirdActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onPause(activity);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onPause(activity);
         }
     }
 
     @Override protected void notifyOnActivityStopped(ThirdActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onStop(activity);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onStop(activity);
         }
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(ThirdActivity activity, Bundle outState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onSaveInstanceState(activity, outState);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onSaveInstanceState(activity, outState);
         }
     }
 
     @Override protected void notifyOnActivityDestroyed(ThirdActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onDestroy(activity);
+        if (activity.passAirCycleLogger != null) {
+            activity.passAirCycleLogger.onDestroy(activity);
         }
     }
 

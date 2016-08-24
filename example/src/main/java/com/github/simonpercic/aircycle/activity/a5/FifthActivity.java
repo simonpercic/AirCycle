@@ -13,7 +13,7 @@ import com.github.simonpercic.aircycle.logger.ActivityAirCycleLogger;
  */
 public class FifthActivity extends AppCompatActivity {
 
-    ActivityAirCycleLogger lifecycleLogger;
+    ActivityAirCycleLogger airCycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

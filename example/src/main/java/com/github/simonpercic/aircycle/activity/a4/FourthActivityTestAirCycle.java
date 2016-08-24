@@ -14,44 +14,44 @@ public class FourthActivityTestAirCycle extends BaseAirCycle<FourthActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(FourthActivity activity, Bundle savedInstanceState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivityCreated(activity, savedInstanceState);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivityCreated(activity, savedInstanceState);
         }
     }
 
     @Override protected void notifyOnActivityStarted(FourthActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivityStarted(activity);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivityStarted(activity);
         }
     }
 
     @Override protected void notifyOnActivityResumed(FourthActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivityResumed(activity);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivityResumed(activity);
         }
     }
 
     @Override protected void notifyOnActivityPaused(FourthActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivityPaused(activity);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivityPaused(activity);
         }
     }
 
     @Override protected void notifyOnActivityStopped(FourthActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivityStopped(activity);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivityStopped(activity);
         }
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(FourthActivity activity, Bundle outState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivitySaveInstanceState(activity, outState);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivitySaveInstanceState(activity, outState);
         }
     }
 
     @Override protected void notifyOnActivityDestroyed(FourthActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onActivityDestroyed(activity);
+        if (activity.lifecycleCallbacksLogger != null) {
+            activity.lifecycleCallbacksLogger.onActivityDestroyed(activity);
         }
     }
 

@@ -13,7 +13,7 @@ import com.github.simonpercic.aircycle.logger.ActivityAirCycleLogger;
  */
 public class FirstActivity extends AppCompatActivity {
 
-    ActivityAirCycleLogger lifecycleLogger;
+    ActivityAirCycleLogger airCycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        lifecycleLogger = new ActivityAirCycleLogger();
+        airCycleLogger = new ActivityAirCycleLogger();
     }
 
     public static Intent getIntent(Context context) {

@@ -14,44 +14,44 @@ public class SecondActivityTestAirCycle extends BaseAirCycle<SecondActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(SecondActivity activity, Bundle savedInstanceState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onCreate(savedInstanceState);
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onCreate(savedInstanceState);
         }
     }
 
     @Override protected void notifyOnActivityStarted(SecondActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onStart();
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onStart();
         }
     }
 
     @Override protected void notifyOnActivityResumed(SecondActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onResume();
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onResume();
         }
     }
 
     @Override protected void notifyOnActivityPaused(SecondActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onPause();
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onPause();
         }
     }
 
     @Override protected void notifyOnActivityStopped(SecondActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onStop();
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onStop();
         }
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(SecondActivity activity, Bundle outState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onSaveInstanceState(outState);
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onSaveInstanceState(outState);
         }
     }
 
     @Override protected void notifyOnActivityDestroyed(SecondActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onDestroy();
+        if (activity.bundleAirCycleLogger != null) {
+            activity.bundleAirCycleLogger.onDestroy();
         }
     }
 

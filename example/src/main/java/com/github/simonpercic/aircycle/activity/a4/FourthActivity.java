@@ -13,13 +13,13 @@ import com.github.simonpercic.aircycle.logger.ActivityLifecycleCallbacksLogger;
  */
 public class FourthActivity extends AppCompatActivity {
 
-    ActivityLifecycleCallbacksLogger lifecycleLogger;
+    ActivityLifecycleCallbacksLogger lifecycleCallbacksLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FourthActivityTestAirCycle.bind(this);
         super.onCreate(savedInstanceState);
-        lifecycleLogger = new ActivityLifecycleCallbacksLogger();
+        lifecycleCallbacksLogger = new ActivityLifecycleCallbacksLogger();
         setContentView(R.layout.activity_base);
     }
 

@@ -13,12 +13,12 @@ import com.github.simonpercic.aircycle.logger.ActivityPassAirCycleLogger;
  */
 public class ThirdActivity extends AppCompatActivity {
 
-    ActivityPassAirCycleLogger<ThirdActivity> lifecycleLogger;
+    ActivityPassAirCycleLogger<ThirdActivity> passAirCycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThirdActivityTestAirCycle.bind(this);
-        lifecycleLogger = new ActivityPassAirCycleLogger<>();
+        passAirCycleLogger = new ActivityPassAirCycleLogger<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
     }

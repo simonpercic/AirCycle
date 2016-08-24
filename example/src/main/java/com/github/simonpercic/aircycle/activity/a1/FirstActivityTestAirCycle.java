@@ -14,44 +14,44 @@ public class FirstActivityTestAirCycle extends BaseAirCycle<FirstActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(FirstActivity activity, Bundle savedInstanceState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onCreate();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onCreate();
         }
     }
 
     @Override protected void notifyOnActivityStarted(FirstActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onStart();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onStart();
         }
     }
 
     @Override protected void notifyOnActivityResumed(FirstActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onResume();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onResume();
         }
     }
 
     @Override protected void notifyOnActivityPaused(FirstActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onPause();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onPause();
         }
     }
 
     @Override protected void notifyOnActivityStopped(FirstActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onStop();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onStop();
         }
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(FirstActivity activity, Bundle outState) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onSaveInstanceState();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onSaveInstanceState();
         }
     }
 
     @Override protected void notifyOnActivityDestroyed(FirstActivity activity) {
-        if (activity.lifecycleLogger != null) {
-            activity.lifecycleLogger.onDestroy();
+        if (activity.airCycleLogger != null) {
+            activity.airCycleLogger.onDestroy();
         }
     }
 

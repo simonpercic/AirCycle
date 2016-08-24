@@ -8,12 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import com.github.simonpercic.aircycle.R;
 import com.github.simonpercic.aircycle.logger.ActivityLifecycleCallbacksLogger;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public class FourthActivity extends AppCompatActivity {
 
     ActivityLifecycleCallbacksLogger lifecycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FourthActivityTestAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         lifecycleLogger = new ActivityLifecycleCallbacksLogger();
         setContentView(R.layout.activity_base);

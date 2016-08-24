@@ -17,6 +17,7 @@ public class ThirdActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThirdActivityTestAirCycle.bind(this);
         lifecycleLogger = new ActivityPassAirCycleLogger<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);

@@ -7,9 +7,9 @@ import com.github.simonpercic.aircycle.lib.BaseAirCycle;
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class TestFirstActivityAirCycle extends BaseAirCycle<FirstActivity> {
+public class FirstActivityTestAirCycle extends BaseAirCycle<FirstActivity> {
 
-    protected TestFirstActivityAirCycle(FirstActivity tActivity) {
+    protected FirstActivityTestAirCycle(FirstActivity tActivity) {
         super(tActivity);
     }
 
@@ -42,6 +42,6 @@ public class TestFirstActivityAirCycle extends BaseAirCycle<FirstActivity> {
     }
 
     static void bind(FirstActivity activity) {
-        new TestFirstActivityAirCycle(activity).registerCallbacks();
+        new FirstActivityTestAirCycle(activity).registerCallbacks();
     }
 }

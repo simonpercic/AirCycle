@@ -17,7 +17,7 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TestSecondActivityAirCycle.bind(this);
+        SecondActivityTestAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
     }

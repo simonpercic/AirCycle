@@ -14,31 +14,45 @@ public class ThirdActivityTestAirCycle extends BaseAirCycle<ThirdActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(ThirdActivity activity, Bundle savedInstanceState) {
-        activity.lifecycleLogger.onCreate(activity, savedInstanceState);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onCreate(activity, savedInstanceState);
+        }
     }
 
     @Override protected void notifyOnActivityStarted(ThirdActivity activity) {
-        activity.lifecycleLogger.onStart(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onStart(activity);
+        }
     }
 
     @Override protected void notifyOnActivityResumed(ThirdActivity activity) {
-        activity.lifecycleLogger.onResume(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onResume(activity);
+        }
     }
 
     @Override protected void notifyOnActivityPaused(ThirdActivity activity) {
-        activity.lifecycleLogger.onPause(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onPause(activity);
+        }
     }
 
     @Override protected void notifyOnActivityStopped(ThirdActivity activity) {
-        activity.lifecycleLogger.onStop(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onStop(activity);
+        }
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(ThirdActivity activity, Bundle outState) {
-        activity.lifecycleLogger.onSaveInstanceState(activity, outState);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onSaveInstanceState(activity, outState);
+        }
     }
 
     @Override protected void notifyOnActivityDestroyed(ThirdActivity activity) {
-        activity.lifecycleLogger.onDestroy(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onDestroy(activity);
+        }
     }
 
     static void bind(ThirdActivity activity) {

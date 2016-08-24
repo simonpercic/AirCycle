@@ -14,31 +14,45 @@ public class FourthActivityTestAirCycle extends BaseAirCycle<FourthActivity> {
     }
 
     @Override protected void notifyOnActivityCreated(FourthActivity activity, Bundle savedInstanceState) {
-        activity.lifecycleLogger.onActivityCreated(activity, savedInstanceState);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivityCreated(activity, savedInstanceState);
+        }
     }
 
     @Override protected void notifyOnActivityStarted(FourthActivity activity) {
-        activity.lifecycleLogger.onActivityStarted(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivityStarted(activity);
+        }
     }
 
     @Override protected void notifyOnActivityResumed(FourthActivity activity) {
-        activity.lifecycleLogger.onActivityResumed(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivityResumed(activity);
+        }
     }
 
     @Override protected void notifyOnActivityPaused(FourthActivity activity) {
-        activity.lifecycleLogger.onActivityPaused(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivityPaused(activity);
+        }
     }
 
     @Override protected void notifyOnActivityStopped(FourthActivity activity) {
-        activity.lifecycleLogger.onActivityStopped(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivityStopped(activity);
+        }
     }
 
     @Override protected void notifyOnActivitySaveInstanceState(FourthActivity activity, Bundle outState) {
-        activity.lifecycleLogger.onActivitySaveInstanceState(activity, outState);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivitySaveInstanceState(activity, outState);
+        }
     }
 
     @Override protected void notifyOnActivityDestroyed(FourthActivity activity) {
-        activity.lifecycleLogger.onActivityDestroyed(activity);
+        if (activity.lifecycleLogger != null) {
+            activity.lifecycleLogger.onActivityDestroyed(activity);
+        }
     }
 
     static void bind(FourthActivity activity) {

@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.activity.a1;
+package com.github.simonpercic.aircycle.activity.a5;
 
 import android.os.Bundle;
 
@@ -7,55 +7,55 @@ import com.github.simonpercic.aircycle.lib.BaseAirCycle;
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class FirstActivityTestAirCycle extends BaseAirCycle<FirstActivity> {
+public class FifthActivityTestAirCycle extends BaseAirCycle<FifthActivity> {
 
-    protected FirstActivityTestAirCycle(FirstActivity tActivity) {
+    protected FifthActivityTestAirCycle(FifthActivity tActivity) {
         super(tActivity);
     }
 
-    @Override protected void notifyOnActivityCreated(FirstActivity activity, Bundle savedInstanceState) {
+    @Override protected void notifyOnActivityCreated(FifthActivity activity, Bundle savedInstanceState) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onCreate();
         }
     }
 
-    @Override protected void notifyOnActivityStarted(FirstActivity activity) {
+    @Override protected void notifyOnActivityStarted(FifthActivity activity) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onStart();
         }
     }
 
-    @Override protected void notifyOnActivityResumed(FirstActivity activity) {
+    @Override protected void notifyOnActivityResumed(FifthActivity activity) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onResume();
         }
     }
 
-    @Override protected void notifyOnActivityPaused(FirstActivity activity) {
+    @Override protected void notifyOnActivityPaused(FifthActivity activity) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onPause();
         }
     }
 
-    @Override protected void notifyOnActivityStopped(FirstActivity activity) {
+    @Override protected void notifyOnActivityStopped(FifthActivity activity) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onStop();
         }
     }
 
-    @Override protected void notifyOnActivitySaveInstanceState(FirstActivity activity, Bundle outState) {
+    @Override protected void notifyOnActivitySaveInstanceState(FifthActivity activity, Bundle outState) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onSaveInstanceState();
         }
     }
 
-    @Override protected void notifyOnActivityDestroyed(FirstActivity activity) {
+    @Override protected void notifyOnActivityDestroyed(FifthActivity activity) {
         if (activity.lifecycleLogger != null) {
             activity.lifecycleLogger.onDestroy();
         }
     }
 
-    static void bind(FirstActivity activity) {
-        new FirstActivityTestAirCycle(activity).registerCallbacks();
+    static void bind(FifthActivity activity) {
+        new FifthActivityTestAirCycle(activity).registerCallbacks();
     }
 }

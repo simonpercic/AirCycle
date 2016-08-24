@@ -8,6 +8,7 @@ import com.github.simonpercic.aircycle.activity.a1.FirstActivity;
 import com.github.simonpercic.aircycle.activity.a4.FourthActivity;
 import com.github.simonpercic.aircycle.activity.a2.SecondActivity;
 import com.github.simonpercic.aircycle.activity.a3.ThirdActivity;
+import com.github.simonpercic.aircycle.activity.a5.FifthActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,5 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_open_fourth) void onBtnOpenFourthClicked() {
         startActivity(FourthActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.btn_open_fifth) void onBtnOpenFifthClicked() {
+        startActivity(FifthActivity.getIntent(this));
     }
 }

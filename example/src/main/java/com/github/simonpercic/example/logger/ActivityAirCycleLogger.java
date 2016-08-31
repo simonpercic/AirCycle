@@ -1,18 +1,16 @@
-package com.github.simonpercic.aircycle.logger;
+package com.github.simonpercic.example.logger;
 
-import android.os.Bundle;
-
-import com.github.simonpercic.aircycle.ActivityBundleAirCycle;
+import com.github.simonpercic.aircycle.ActivityAirCycle;
 
 import timber.log.Timber;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class ActivityBundleAirCycleLogger implements ActivityBundleAirCycle {
+public class ActivityAirCycleLogger implements ActivityAirCycle {
 
-    @Override public void onCreate(Bundle savedInstanceState) {
-        Timber.d("onCreate savedInstanceState: %s", savedInstanceState);
+    @Override public void onCreate() {
+        Timber.d("onCreate");
     }
 
     @Override public void onStart() {
@@ -31,8 +29,8 @@ public class ActivityBundleAirCycleLogger implements ActivityBundleAirCycle {
         Timber.d("onStop");
     }
 
-    @Override public void onSaveInstanceState(Bundle outState) {
-        Timber.d("onSaveInstanceState outState: %s", outState);
+    @Override public void onSaveInstanceState() {
+        Timber.d("onSaveInstanceState");
     }
 
     @Override public void onDestroy() {

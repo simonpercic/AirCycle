@@ -1,12 +1,12 @@
-package com.github.simonpercic.aircycle.activity.a4;
+package com.github.simonpercic.example.activity.a4;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.github.simonpercic.aircycle.R;
-import com.github.simonpercic.aircycle.logger.ActivityLifecycleCallbacksLogger;
+import com.github.simonpercic.example.R;
+import com.github.simonpercic.example.logger.ActivityLifecycleCallbacksLogger;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>

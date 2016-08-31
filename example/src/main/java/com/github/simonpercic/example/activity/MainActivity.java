@@ -1,14 +1,14 @@
-package com.github.simonpercic.aircycle.activity;
+package com.github.simonpercic.example.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.github.simonpercic.aircycle.R;
-import com.github.simonpercic.aircycle.activity.a1.FirstActivity;
-import com.github.simonpercic.aircycle.activity.a4.FourthActivity;
-import com.github.simonpercic.aircycle.activity.a2.SecondActivity;
-import com.github.simonpercic.aircycle.activity.a3.ThirdActivity;
-import com.github.simonpercic.aircycle.activity.a5.FifthActivity;
+import com.github.simonpercic.example.R;
+import com.github.simonpercic.example.activity.a1.FirstActivity;
+import com.github.simonpercic.example.activity.a2.SecondActivity;
+import com.github.simonpercic.example.activity.a3.ThirdActivity;
+import com.github.simonpercic.example.activity.a4.FourthActivity;
+import com.github.simonpercic.example.activity.a5.FifthActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

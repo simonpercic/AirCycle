@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.logger;
+package com.github.simonpercic.example.logger;
 
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;

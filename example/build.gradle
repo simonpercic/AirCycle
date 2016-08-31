@@ -62,6 +62,8 @@ android {
 ext.butterknifeVersion = '8.2.1'
 
 dependencies {
+    compile project(':aircycle-lib')
+
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile 'com.jakewharton.timber:timber:4.2.0'
     compile "com.jakewharton:butterknife:$butterknifeVersion"

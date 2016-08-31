@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.lib;
+package com.github.simonpercic.aircycle;
 
 import android.os.Bundle;
 

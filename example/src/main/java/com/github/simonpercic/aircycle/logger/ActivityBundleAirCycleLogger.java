@@ -2,7 +2,7 @@ package com.github.simonpercic.aircycle.logger;
 
 import android.os.Bundle;
 
-import com.github.simonpercic.aircycle.lib.ActivityBundleAirCycle;
+import com.github.simonpercic.aircycle.ActivityBundleAirCycle;
 
 import timber.log.Timber;
 

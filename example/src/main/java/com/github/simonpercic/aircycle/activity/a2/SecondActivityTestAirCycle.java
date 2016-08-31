@@ -2,7 +2,7 @@ package com.github.simonpercic.aircycle.activity.a2;
 
 import android.os.Bundle;
 
-import com.github.simonpercic.aircycle.lib.BaseAirCycle;
+import com.github.simonpercic.aircycle.BaseAirCycle;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>

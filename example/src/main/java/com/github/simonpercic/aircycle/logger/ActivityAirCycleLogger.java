@@ -1,6 +1,6 @@
 package com.github.simonpercic.aircycle.logger;
 
-import com.github.simonpercic.aircycle.lib.ActivityAirCycle;
+import com.github.simonpercic.aircycle.ActivityAirCycle;
 
 import timber.log.Timber;
 

@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.lib;
+package com.github.simonpercic.aircycle;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -6,16 +6,16 @@ import android.os.Looper;
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class CancelableHandler {
+class CancelableHandler {
 
     private final Handler handler;
     private boolean scheduled = false;
 
-    public CancelableHandler() {
+    CancelableHandler() {
         handler = new Handler(Looper.getMainLooper());
     }
 
-    public void post(final Runnable runnable) {
+    void post(final Runnable runnable) {
         scheduled = true;
         handler.post(new Runnable() {
             @Override public void run() {
@@ -25,12 +25,12 @@ public class CancelableHandler {
         });
     }
 
-    public void cancel() {
+    void cancel() {
         scheduled = false;
         handler.removeCallbacksAndMessages(null);
     }
 
-    public boolean isScheduled() {
+    boolean isScheduled() {
         return scheduled;
     }
 }

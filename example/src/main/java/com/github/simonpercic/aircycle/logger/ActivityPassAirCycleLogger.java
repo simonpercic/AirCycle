@@ -3,7 +3,7 @@ package com.github.simonpercic.aircycle.logger;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.github.simonpercic.aircycle.lib.ActivityPassAirCycle;
+import com.github.simonpercic.aircycle.ActivityPassAirCycle;
 
 import timber.log.Timber;
 

@@ -1,4 +1,4 @@
-package com.github.simonpercic.aircycle.lib;
+package com.github.simonpercic.aircycle;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>

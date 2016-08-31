@@ -1,4 +1,4 @@
-package com.github.simonpercic.example;
+package com.github.simonpercic.example.aircycle;
 
 import android.app.Application;
 

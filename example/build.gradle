@@ -17,7 +17,7 @@ android {
     buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId 'com.github.simonpercic.example'
+        applicationId 'com.github.simonpercic.example.aircycle'
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1

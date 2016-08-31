@@ -1,28 +1,30 @@
-package com.github.simonpercic.example.activity.a2;
+package com.github.simonpercic.example.aircycle.activity.a1;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.github.simonpercic.example.R;
-import com.github.simonpercic.example.logger.ActivityBundleAirCycleLogger;
+import com.github.simonpercic.example.aircycle.R;
+import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class SecondActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity {
 
-    final ActivityBundleAirCycleLogger bundleAirCycleLogger = new ActivityBundleAirCycleLogger();
+    ActivityAirCycleLogger airCycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SecondActivityTestAirCycle.bind(this);
+        FirstActivityTestAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
+        airCycleLogger = new ActivityAirCycleLogger();
     }
 
     public static Intent getIntent(Context context) {
-        return new Intent(context, SecondActivity.class);
+        return new Intent(context, FirstActivity.class);
     }
 }

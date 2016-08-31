@@ -1,4 +1,4 @@
-package com.github.simonpercic.example.logger;
+package com.github.simonpercic.example.aircycle.logger;
 
 import android.app.Activity;
 import android.os.Bundle;

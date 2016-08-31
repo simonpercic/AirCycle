@@ -1,4 +1,4 @@
-package com.github.simonpercic.example.activity.a1;
+package com.github.simonpercic.example.aircycle.activity.a1;
 
 import android.os.Bundle;
 

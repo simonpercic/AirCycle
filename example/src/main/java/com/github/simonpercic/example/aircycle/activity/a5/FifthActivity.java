@@ -1,12 +1,12 @@
-package com.github.simonpercic.example.activity.a5;
+package com.github.simonpercic.example.aircycle.activity.a5;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.github.simonpercic.example.R;
-import com.github.simonpercic.example.logger.ActivityAirCycleLogger;
+import com.github.simonpercic.example.aircycle.R;
+import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>

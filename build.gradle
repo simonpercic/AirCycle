@@ -28,6 +28,7 @@ subprojects {
     }
 
     project.ext {
+        androidVersion = '4.1.1.4'
         compileSdkVersion = 23
         buildToolsVersion = '23.0.2'
         minSdkVersion = 15

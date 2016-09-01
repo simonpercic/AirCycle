@@ -3,7 +3,6 @@ package com.github.simonpercic.aircycle;
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
@@ -13,7 +12,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
     private static final String UNUSED_PARAMETERS = "UnusedParameters";
 
     private final T tActivity;
-    @Nullable private CancelableHandler handler;
+    private CancelableHandler handler;
 
     protected BaseAirCycle(T tActivity) {
         this.tActivity = tActivity;

@@ -12,6 +12,10 @@ public final class ElementValidator {
         // no instance
     }
 
+    public static boolean isPublic(Element element) {
+        return hasModifier(element, Modifier.PUBLIC);
+    }
+
     public static boolean isPrivate(Element element) {
         return hasModifier(element, Modifier.PRIVATE);
     }

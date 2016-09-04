@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
@@ -46,6 +48,20 @@ public class FieldValidator {
                     fieldEnclosingElement.getQualifiedName(),
                     field.getSimpleName());
 
+            logger.e(message, fieldEnclosingElement);
+            return false;
+        }
+
+        TypeMirror typeMirror = field.asType();
+        if (typeMirror.getKind() == TypeKind.DECLARED && !(typeMirror instanceof DeclaredType)) {
+            String message = String.format("Field `%s` must be declared.", field.getSimpleName());
+            logger.e(message, fieldEnclosingElement);
+            return false;
+        }
+
+        DeclaredType declaredType = (DeclaredType) typeMirror;
+        if (!(declaredType.asElement() instanceof TypeElement)) {
+            String message = String.format("Field `%s` is of invalid type.", field.getSimpleName());
             logger.e(message, fieldEnclosingElement);
             return false;
         }

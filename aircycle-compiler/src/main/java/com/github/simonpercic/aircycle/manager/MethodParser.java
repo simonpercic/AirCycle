@@ -10,10 +10,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 
 /**
@@ -35,14 +35,9 @@ public class MethodParser {
         List<LifecycleMethod> lifecycleMethods = new ArrayList<>();
 
         List<? extends Element> allMembers = elementUtils.getAllMembers(element);
+        List<ExecutableElement> allMethods = ElementFilter.methodsIn(allMembers);
 
-        for (Element member : allMembers) {
-            if (member.getKind() != ElementKind.METHOD) {
-                continue;
-            }
-
-            ExecutableElement method = (ExecutableElement) member;
-
+        for (ExecutableElement method : allMethods) {
             if (!isLifecycleMethod(method)) {
                 continue;
             }
@@ -119,6 +114,24 @@ public class MethodParser {
             case "onCreate":
             case "onActivityCreated":
                 return ActivityLifecycle.CREATE;
+            case "onStart":
+            case "onActivityStarted":
+                return ActivityLifecycle.START;
+            case "onResume":
+            case "onActivityResumed":
+                return ActivityLifecycle.RESUME;
+            case "onPause":
+            case "onActivityPaused":
+                return ActivityLifecycle.PAUSE;
+            case "onStop":
+            case "onActivityStopped":
+                return ActivityLifecycle.STOP;
+            case "onSaveInstanceState":
+            case "onActivitySaveInstanceState":
+                return ActivityLifecycle.SAVE_INSTANCE_STATE;
+            case "onDestroy":
+            case "onActivityDestroyed":
+                return ActivityLifecycle.DESTROY;
             default:
                 return null;
         }

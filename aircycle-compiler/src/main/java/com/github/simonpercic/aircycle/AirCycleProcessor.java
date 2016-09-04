@@ -6,7 +6,7 @@ import com.github.simonpercic.aircycle.manager.ClassFileWriter;
 import com.github.simonpercic.aircycle.manager.FieldValidator;
 import com.github.simonpercic.aircycle.manager.MethodParser;
 import com.github.simonpercic.aircycle.model.LifecycleMethod;
-import com.github.simonpercic.aircycle.utils.ClassGenerator;
+import com.github.simonpercic.aircycle.manager.ClassGenerator;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.TypeSpec;
 
@@ -31,10 +31,9 @@ import javax.lang.model.type.DeclaredType;
 @AutoService(Processor.class)
 public class AirCycleProcessor extends AbstractProcessor {
 
-    public static final String ANNOTATION = "@" + AirCycle.class.getSimpleName();
-
     @Inject FieldValidator fieldValidator;
     @Inject MethodParser methodParser;
+    @Inject ClassGenerator classGenerator;
     @Inject ClassFileWriter classFileWriter;
 
     @Override
@@ -73,7 +72,7 @@ public class AirCycleProcessor extends AbstractProcessor {
                 return true;
             }
 
-            TypeSpec typeSpec = ClassGenerator.generateClass(field, methods);
+            TypeSpec typeSpec = classGenerator.generateClass(field, methods);
             classFileWriter.writeClass(typeSpec, (TypeElement) field.getEnclosingElement());
         }
 

@@ -1,6 +1,6 @@
 package com.github.simonpercic.aircycle.manager;
 
-import com.github.simonpercic.aircycle.AirCycleProcessor;
+import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.aircycle.utils.ElementValidator;
 
 import javax.inject.Inject;
@@ -32,8 +32,8 @@ public class FieldValidator {
 
     public boolean isFieldValid(VariableElement field) {
         if (ElementValidator.isPrivate(field)) {
-            String message = String.format("Fields annotated with %s must not be private.",
-                    AirCycleProcessor.ANNOTATION);
+            String message = String.format("Fields annotated with @%s must not be private.",
+                    AirCycle.class.getSimpleName());
 
             logger.e(message, field);
             return false;

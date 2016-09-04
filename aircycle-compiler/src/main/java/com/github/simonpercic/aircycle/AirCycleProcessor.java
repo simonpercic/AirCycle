@@ -2,10 +2,13 @@ package com.github.simonpercic.aircycle;
 
 import com.github.simonpercic.aircycle.dagger.DaggerProcessorComponent;
 import com.github.simonpercic.aircycle.dagger.ProcessorModule;
+import com.github.simonpercic.aircycle.manager.ClassFileWriter;
 import com.github.simonpercic.aircycle.manager.FieldValidator;
 import com.github.simonpercic.aircycle.manager.MethodParser;
 import com.github.simonpercic.aircycle.model.LifecycleMethod;
+import com.github.simonpercic.aircycle.utils.ClassGenerator;
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.TypeSpec;
 
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +35,7 @@ public class AirCycleProcessor extends AbstractProcessor {
 
     @Inject FieldValidator fieldValidator;
     @Inject MethodParser methodParser;
+    @Inject ClassFileWriter classFileWriter;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
@@ -69,7 +73,8 @@ public class AirCycleProcessor extends AbstractProcessor {
                 return true;
             }
 
-            // TODO: 04/09/16 impl
+            TypeSpec typeSpec = ClassGenerator.generateClass(field, methods);
+            classFileWriter.writeClass(typeSpec, (TypeElement) field.getEnclosingElement());
         }
 
         return true;

@@ -92,10 +92,23 @@ public class AirCycleTest {
                 + "    @AirCycle ActivityAirCycle airCycle;\n"
                 + "}");
 
+        JavaFileObject expected = JavaFileObjects.forSourceString("activity.SampleActivityAirCycle",
+                "package activity;\n"
+                        + "\n"
+                        + "import com.github.simonpercic.aircycle.BaseAirCycle;\n"
+                        + "\n"
+                        + "public class SampleActivityAirCycle extends BaseAirCycle<SampleActivity> {\n"
+                        + "    protected SampleActivityAirCycle(SampleActivity activity) {\n"
+                        + "        super(activity);\n"
+                        + "    }\n"
+                        + "}");
+
         assertAbout(javaSources())
                 .that(ImmutableList.of(input))
                 .processedWith(new AirCycleProcessor())
-                .compilesWithoutError();
+                .compilesWithoutWarnings()
+                .and()
+                .generatesSources(expected);
     }
 
     @Test
@@ -120,6 +133,6 @@ public class AirCycleTest {
         assertAbout(javaSources())
                 .that(ImmutableList.of(baseActivity, input))
                 .processedWith(new AirCycleProcessor())
-                .compilesWithoutError();
+                .compilesWithoutWarnings();
     }
 }

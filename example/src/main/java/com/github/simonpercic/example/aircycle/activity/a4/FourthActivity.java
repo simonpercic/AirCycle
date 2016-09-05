@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityLifecycleCallbacksLogger;
 
@@ -13,11 +14,11 @@ import com.github.simonpercic.example.aircycle.logger.ActivityLifecycleCallbacks
  */
 public class FourthActivity extends AppCompatActivity {
 
-    ActivityLifecycleCallbacksLogger lifecycleCallbacksLogger;
+    @AirCycle ActivityLifecycleCallbacksLogger lifecycleCallbacksLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FourthActivityTestAirCycle.bind(this);
+        FourthActivityAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         lifecycleCallbacksLogger = new ActivityLifecycleCallbacksLogger();
         setContentView(R.layout.activity_base);

@@ -67,7 +67,10 @@ dependencies {
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile 'com.jakewharton.timber:timber:4.2.0'
     compile "com.jakewharton:butterknife:$butterknifeVersion"
+    compile project(':aircycle-api')
+
     apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    apt project(':aircycle-compiler')
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'

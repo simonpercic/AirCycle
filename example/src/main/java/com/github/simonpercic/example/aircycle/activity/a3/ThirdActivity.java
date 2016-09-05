@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityPassAirCycleLogger;
 
@@ -13,11 +14,11 @@ import com.github.simonpercic.example.aircycle.logger.ActivityPassAirCycleLogger
  */
 public class ThirdActivity extends AppCompatActivity {
 
-    ActivityPassAirCycleLogger<ThirdActivity> passAirCycleLogger;
+    @AirCycle ActivityPassAirCycleLogger<ThirdActivity> passAirCycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThirdActivityTestAirCycle.bind(this);
+        ThirdActivityAirCycle.bind(this);
         passAirCycleLogger = new ActivityPassAirCycleLogger<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);

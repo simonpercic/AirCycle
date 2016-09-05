@@ -15,10 +15,10 @@ dependencies {
     compile 'com.squareup:javapoet:1.7.0'
     compile 'com.github.simonpercic:collectionhelper:1.2.0'
     compile "com.google.dagger:dagger:$daggerVersion"
+    compile "com.google.android:android:$androidVersion"
 
     apt "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    testCompile "com.google.android:android:$androidVersion"
     testCompile 'junit:junit:4.12'
     testCompile 'com.google.testing.compile:compile-testing:0.9'
     testCompile files(org.gradle.internal.jvm.Jvm.current().getToolsJar())

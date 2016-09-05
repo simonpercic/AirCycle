@@ -1,1 +1,1 @@
-include ':example', ':aircycle-api', ':aircycle-lib', ':aircycle-compiler'
+include ':aircycle-api', ':aircycle-lib', ':aircycle-compiler', ':example'

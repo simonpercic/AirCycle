@@ -1,5 +1,8 @@
 package com.github.simonpercic.aircycle.manager;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 import com.github.simonpercic.aircycle.exception.MethodArgumentsException;
 import com.github.simonpercic.aircycle.model.LifecycleMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
@@ -102,8 +105,8 @@ public class MethodParser {
         List<? extends VariableElement> parameters = method.getParameters();
 
         if (!CollectionHelper.isEmpty(parameters)) {
-            TypeMirror bundleType = elementUtils.getTypeElement("android.os.Bundle").asType();
-            TypeMirror activityType = elementUtils.getTypeElement("android.app.Activity").asType();
+            TypeMirror bundleType = elementUtils.getTypeElement(Bundle.class.getCanonicalName()).asType();
+            TypeMirror activityType = elementUtils.getTypeElement(Activity.class.getCanonicalName()).asType();
 
             for (int i = 0; i < parameters.size(); i++) {
                 VariableElement parameter = parameters.get(i);

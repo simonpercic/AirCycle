@@ -1,5 +1,7 @@
 package com.github.simonpercic.aircycle.manager;
 
+import android.app.Activity;
+
 import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.aircycle.utils.ElementValidator;
 
@@ -41,7 +43,7 @@ public class FieldValidator {
 
         TypeElement fieldEnclosingElement = (TypeElement) field.getEnclosingElement();
         TypeMirror enclosingType = fieldEnclosingElement.asType();
-        TypeMirror activityType = elementUtils.getTypeElement("android.app.Activity").asType();
+        TypeMirror activityType = elementUtils.getTypeElement(Activity.class.getCanonicalName()).asType();
 
         if (!typeUtils.isSubtype(enclosingType, activityType)) {
             String message = String.format("Class `%s` enclosing the field `%s` is not a subtype of an Activity.",

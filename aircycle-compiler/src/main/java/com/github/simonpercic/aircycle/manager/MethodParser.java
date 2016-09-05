@@ -1,5 +1,6 @@
 package com.github.simonpercic.aircycle.manager;
 
+import com.github.simonpercic.aircycle.exception.MethodArgumentsException;
 import com.github.simonpercic.aircycle.model.LifecycleMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.utils.ElementValidator;
@@ -102,12 +103,27 @@ public class MethodParser {
 
         if (!CollectionHelper.isEmpty(parameters)) {
             TypeMirror bundleType = elementUtils.getTypeElement("android.os.Bundle").asType();
+            TypeMirror activityType = elementUtils.getTypeElement("android.app.Activity").asType();
 
-            for (VariableElement parameter : parameters) {
+            for (int i = 0; i < parameters.size(); i++) {
+                VariableElement parameter = parameters.get(i);
                 TypeMirror paramType = parameter.asType();
 
-                if (typeUtils.isSameType(paramType, bundleType)) {
-                    builder.addBundleArg();
+                try {
+                    if (typeUtils.isSubtype(paramType, activityType)) {
+                        builder.addActivityArg();
+                    } else if (typeUtils.isSameType(paramType, bundleType)) {
+                        builder.addBundleArg();
+                    } else {
+                        String message = String.format(
+                                "Invalid method argument of type `%s` at index `%s` in `%s",
+                                paramType.toString(), i, methodName);
+
+                        logger.e(message, method);
+                    }
+                } catch (MethodArgumentsException e) {
+                    logger.e(e.getMessage(), method);
+                    return null;
                 }
             }
         }

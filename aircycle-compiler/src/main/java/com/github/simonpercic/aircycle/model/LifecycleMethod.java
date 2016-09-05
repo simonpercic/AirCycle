@@ -1,5 +1,6 @@
 package com.github.simonpercic.aircycle.model;
 
+import com.github.simonpercic.aircycle.exception.MethodArgumentsException;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.model.type.ListenerArg;
 import com.github.simonpercic.aircycle.utils.StringUtils;
@@ -58,14 +59,18 @@ public class LifecycleMethod {
             this.args = new ArrayList<>(2);
         }
 
-        public Builder addBundleArg() {
+        public Builder addBundleArg() throws MethodArgumentsException {
             if (args.contains(ListenerArg.BUNDLE)) {
-                throw new IllegalArgumentException("`bundle` arg already present");
+                String message = String.format("`bundle` arg already present in `%s`", methodName);
+                throw new MethodArgumentsException(message);
             }
 
             if (lifecycleType != ActivityLifecycle.CREATE && lifecycleType != ActivityLifecycle.SAVE_INSTANCE_STATE) {
-                throw new IllegalArgumentException(
-                        "`bundle` arg can only be added for `onCreate` or `onSaveInstanceState`");
+                String message = String.format(
+                        "`bundle` arg can only be added for `onCreate` or `onSaveInstanceState` in `%s`",
+                        methodName);
+
+                throw new MethodArgumentsException(message);
             }
 
             args.add(ListenerArg.BUNDLE);
@@ -73,9 +78,10 @@ public class LifecycleMethod {
             return this;
         }
 
-        public Builder addActivityArg() {
+        public Builder addActivityArg() throws MethodArgumentsException {
             if (args.contains(ListenerArg.ACTIVITY)) {
-                throw new IllegalArgumentException("`activity` arg already present");
+                String message = String.format("`activity` arg already present in `%s`", methodName);
+                throw new MethodArgumentsException(message);
             }
 
             args.add(ListenerArg.ACTIVITY);

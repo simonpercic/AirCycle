@@ -63,7 +63,8 @@ public class ClassGenerator {
 
         // TODO: 04/09/16 add comment to generated class
 
-        TypeSpec.Builder builder = TypeSpec.classBuilder(activityName + CLASS_SUFFIX)
+        String className = activityName + CLASS_SUFFIX;
+        TypeSpec.Builder builder = TypeSpec.classBuilder(className)
                 .addModifiers(Modifier.PUBLIC)
                 .superclass(superClass);
 
@@ -79,6 +80,14 @@ public class ClassGenerator {
             MethodSpec lifecycleMethod = createLifecycleMethod(method, enclosingElement, field);
             builder.addMethod(lifecycleMethod);
         }
+
+        MethodSpec bind = MethodSpec.methodBuilder("bind")
+                .addModifiers(Modifier.STATIC)
+                .addParameter(enclosingActivityClass, ACTIVITY_PARAM)
+                .addStatement("new $L(" + ACTIVITY_PARAM + ").registerCallbacks()", className)
+                .build();
+
+        builder.addMethod(bind);
 
         return builder.build();
     }

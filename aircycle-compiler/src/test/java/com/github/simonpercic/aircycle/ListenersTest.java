@@ -88,6 +88,10 @@ public class ListenersTest {
                         + "            activity.airCycle.onDestroy();\n"
                         + "        }\n"
                         + "    }\n"
+                        + "\n"
+                        + "    static void bind(SampleActivity activity) {\n"
+                        + "        new SampleActivityAirCycle(activity).registerCallbacks();\n"
+                        + "    }\n"
                         + "}");
 
         assertAbout(javaSources())
@@ -170,6 +174,10 @@ public class ListenersTest {
                         + "        if (activity.airCycle != null) {\n"
                         + "            activity.airCycle.onDestroy();\n"
                         + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    static void bind(SampleActivity activity) {\n"
+                        + "        new SampleActivityAirCycle(activity).registerCallbacks();\n"
                         + "    }\n"
                         + "}");
 
@@ -254,6 +262,10 @@ public class ListenersTest {
                         + "            activity.airCycle.onDestroy(activity);\n"
                         + "        }\n"
                         + "    }\n"
+                        + "\n"
+                        + "    static void bind(SampleActivity activity) {\n"
+                        + "        new SampleActivityAirCycle(activity).registerCallbacks();\n"
+                        + "    }\n"
                         + "}");
 
         assertAbout(javaSources())
@@ -336,6 +348,10 @@ public class ListenersTest {
                         + "        if (activity.airCycle != null) {\n"
                         + "            activity.airCycle.onActivityDestroyed(activity);\n"
                         + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    static void bind(SampleActivity activity) {\n"
+                        + "        new SampleActivityAirCycle(activity).registerCallbacks();\n"
                         + "    }\n"
                         + "}");
 

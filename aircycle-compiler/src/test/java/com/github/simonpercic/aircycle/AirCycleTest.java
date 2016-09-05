@@ -92,6 +92,50 @@ public class AirCycleTest {
                 + "    @AirCycle ActivityAirCycle airCycle;\n"
                 + "}");
 
+        assertAbout(javaSources())
+                .that(ImmutableList.of(input))
+                .processedWith(new AirCycleProcessor())
+                .compilesWithoutWarnings();
+    }
+
+    @Test
+    public void testEnclosingClassExtendedActivity() throws Exception {
+        JavaFileObject input = JavaFileObjects.forSourceString("activity.SampleActivity", "package activity;\n"
+                + "\n"
+                + "import com.github.simonpercic.aircycle.ActivityAirCycle;\n"
+                + "import com.github.simonpercic.aircycle.AirCycle;\n"
+                + "\n"
+                + "public class SampleActivity extends BaseActivity {\n"
+                + "    @AirCycle ActivityAirCycle airCycle;\n"
+                + "}");
+
+        JavaFileObject baseActivity = JavaFileObjects.forSourceString("activity.BaseActivity", "package activity;\n"
+                + "\n"
+                + "import android.app.Activity;\n"
+                + "\n"
+                + "public class BaseActivity extends Activity {\n"
+                + "    \n"
+                + "}");
+
+        assertAbout(javaSources())
+                .that(ImmutableList.of(baseActivity, input))
+                .processedWith(new AirCycleProcessor())
+                .compilesWithoutWarnings();
+    }
+
+    @Test
+    public void testActivityAirCycle() throws Exception {
+        JavaFileObject input = JavaFileObjects.forSourceString("activity.SampleActivity", "package activity;\n"
+                + "\n"
+                + "import android.app.Activity;\n"
+                + "\n"
+                + "import com.github.simonpercic.aircycle.ActivityAirCycle;\n"
+                + "import com.github.simonpercic.aircycle.AirCycle;\n"
+                + "\n"
+                + "public class SampleActivity extends Activity {\n"
+                + "    @AirCycle ActivityAirCycle airCycle;\n"
+                + "}");
+
         JavaFileObject expected = JavaFileObjects.forSourceString("activity.SampleActivityAirCycle",
                 "package activity;\n"
                         + "\n"
@@ -105,7 +149,7 @@ public class AirCycleTest {
                         + "    }\n"
                         + "\n"
                         + "    @Override\n"
-                        + "    protected void notifyOnActivityCreated(SampleActivity activity, Bundle savedInstanceState) {\n"
+                        + "    protected void notifyOnActivityCreated(SampleActivity activity, Bundle bundle) {\n"
                         + "        if (activity.airCycle != null) {\n"
                         + "            activity.airCycle.onCreate();\n"
                         + "        }\n"
@@ -140,7 +184,7 @@ public class AirCycleTest {
                         + "    }\n"
                         + "\n"
                         + "    @Override\n"
-                        + "    protected void notifyOnActivitySaveInstanceState(SampleActivity activity, Bundle outState) {\n"
+                        + "    protected void notifyOnActivitySaveInstanceState(SampleActivity activity, Bundle bundle) {\n"
                         + "        if (activity.airCycle != null) {\n"
                         + "            activity.airCycle.onSaveInstanceState();\n"
                         + "        }\n"
@@ -163,27 +207,85 @@ public class AirCycleTest {
     }
 
     @Test
-    public void testEnclosingClassExtendedActivity() throws Exception {
+    public void testActivityBundleAirCycle() throws Exception {
         JavaFileObject input = JavaFileObjects.forSourceString("activity.SampleActivity", "package activity;\n"
-                + "\n"
-                + "import com.github.simonpercic.aircycle.ActivityAirCycle;\n"
-                + "import com.github.simonpercic.aircycle.AirCycle;\n"
-                + "\n"
-                + "public class SampleActivity extends BaseActivity {\n"
-                + "    @AirCycle ActivityAirCycle airCycle;\n"
-                + "}");
-
-        JavaFileObject baseActivity = JavaFileObjects.forSourceString("activity.BaseActivity", "package activity;\n"
                 + "\n"
                 + "import android.app.Activity;\n"
                 + "\n"
-                + "public class BaseActivity extends Activity {\n"
-                + "    \n"
+                + "import com.github.simonpercic.aircycle.ActivityBundleAirCycle;\n"
+                + "import com.github.simonpercic.aircycle.AirCycle;\n"
+                + "\n"
+                + "public class SampleActivity extends Activity {\n"
+                + "    @AirCycle ActivityBundleAirCycle airCycle;\n"
                 + "}");
 
+        JavaFileObject expected = JavaFileObjects.forSourceString("activity.SampleActivityAirCycle",
+                "package activity;\n"
+                        + "\n"
+                        + "import android.os.Bundle;\n"
+                        + "import com.github.simonpercic.aircycle.BaseAirCycle;\n"
+                        + "import java.lang.Override;\n"
+                        + "\n"
+                        + "public class SampleActivityAirCycle extends BaseAirCycle<SampleActivity> {\n"
+                        + "    protected SampleActivityAirCycle(SampleActivity activity) {\n"
+                        + "        super(activity);\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityCreated(SampleActivity activity, Bundle bundle) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onCreate(bundle);\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityStarted(SampleActivity activity) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onStart();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityResumed(SampleActivity activity) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onResume();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityPaused(SampleActivity activity) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onPause();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityStopped(SampleActivity activity) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onStop();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivitySaveInstanceState(SampleActivity activity, Bundle bundle) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onSaveInstanceState(bundle);\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityDestroyed(SampleActivity activity) {\n"
+                        + "        if (activity.airCycle != null) {\n"
+                        + "            activity.airCycle.onDestroy();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "}");
+
         assertAbout(javaSources())
-                .that(ImmutableList.of(baseActivity, input))
+                .that(ImmutableList.of(input))
                 .processedWith(new AirCycleProcessor())
-                .compilesWithoutWarnings();
+                .compilesWithoutWarnings()
+                .and()
+                .generatesSources(expected);
     }
 }

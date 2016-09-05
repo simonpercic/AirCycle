@@ -13,7 +13,7 @@ public class FirstActivityTestAirCycle extends BaseAirCycle<FirstActivity> {
         super(tActivity);
     }
 
-    @Override protected void notifyOnActivityCreated(FirstActivity activity, Bundle savedInstanceState) {
+    @Override protected void notifyOnActivityCreated(FirstActivity activity, Bundle bundle) {
         if (activity.airCycleLogger != null) {
             activity.airCycleLogger.onCreate();
         }
@@ -43,7 +43,7 @@ public class FirstActivityTestAirCycle extends BaseAirCycle<FirstActivity> {
         }
     }
 
-    @Override protected void notifyOnActivitySaveInstanceState(FirstActivity activity, Bundle outState) {
+    @Override protected void notifyOnActivitySaveInstanceState(FirstActivity activity, Bundle bundle) {
         if (activity.airCycleLogger != null) {
             activity.airCycleLogger.onSaveInstanceState();
         }

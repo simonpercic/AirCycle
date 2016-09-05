@@ -13,9 +13,9 @@ public class FourthActivityTestAirCycle extends BaseAirCycle<FourthActivity> {
         super(tActivity);
     }
 
-    @Override protected void notifyOnActivityCreated(FourthActivity activity, Bundle savedInstanceState) {
+    @Override protected void notifyOnActivityCreated(FourthActivity activity, Bundle bundle) {
         if (activity.lifecycleCallbacksLogger != null) {
-            activity.lifecycleCallbacksLogger.onActivityCreated(activity, savedInstanceState);
+            activity.lifecycleCallbacksLogger.onActivityCreated(activity, bundle);
         }
     }
 
@@ -43,9 +43,9 @@ public class FourthActivityTestAirCycle extends BaseAirCycle<FourthActivity> {
         }
     }
 
-    @Override protected void notifyOnActivitySaveInstanceState(FourthActivity activity, Bundle outState) {
+    @Override protected void notifyOnActivitySaveInstanceState(FourthActivity activity, Bundle bundle) {
         if (activity.lifecycleCallbacksLogger != null) {
-            activity.lifecycleCallbacksLogger.onActivitySaveInstanceState(activity, outState);
+            activity.lifecycleCallbacksLogger.onActivitySaveInstanceState(activity, bundle);
         }
     }
 

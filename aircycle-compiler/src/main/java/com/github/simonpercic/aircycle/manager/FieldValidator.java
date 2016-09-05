@@ -53,7 +53,7 @@ public class FieldValidator {
         }
 
         TypeMirror typeMirror = field.asType();
-        if (typeMirror.getKind() == TypeKind.DECLARED && !(typeMirror instanceof DeclaredType)) {
+        if (typeMirror.getKind() != TypeKind.DECLARED || !(typeMirror instanceof DeclaredType)) {
             String message = String.format("Field `%s` must be declared.", field.getSimpleName());
             logger.e(message, fieldEnclosingElement);
             return false;

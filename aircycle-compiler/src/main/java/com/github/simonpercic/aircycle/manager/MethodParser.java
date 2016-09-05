@@ -3,6 +3,7 @@ package com.github.simonpercic.aircycle.manager;
 import com.github.simonpercic.aircycle.model.LifecycleMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.utils.ElementValidator;
+import com.github.simonpercic.collectionhelper.CollectionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,10 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
@@ -24,11 +27,13 @@ public class MethodParser {
 
     private final ProcessorLogger logger;
     private final Elements elementUtils;
+    private final Types typeUtils;
 
     @Inject
-    public MethodParser(ProcessorLogger logger, Elements elementUtils) {
+    public MethodParser(ProcessorLogger logger, Elements elementUtils, Types typeUtils) {
         this.logger = logger;
         this.elementUtils = elementUtils;
+        this.typeUtils = typeUtils;
     }
 
     public List<LifecycleMethod> parseLifecycleMethods(TypeElement element) {
@@ -91,11 +96,21 @@ public class MethodParser {
             return null;
         }
 
+        LifecycleMethod.Builder builder = LifecycleMethod.builder(activityLifecycle, methodName);
+
         List<? extends VariableElement> parameters = method.getParameters();
 
-        // TODO: 04/09/16 parse params
+        if (!CollectionHelper.isEmpty(parameters)) {
+            TypeMirror bundleType = elementUtils.getTypeElement("android.os.Bundle").asType();
 
-        LifecycleMethod.Builder builder = LifecycleMethod.builder(activityLifecycle, methodName);
+            for (VariableElement parameter : parameters) {
+                TypeMirror paramType = parameter.asType();
+
+                if (typeUtils.isSameType(paramType, bundleType)) {
+                    builder.addBundleArg();
+                }
+            }
+        }
 
         return builder.build();
     }

@@ -113,7 +113,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
     // endregion ActivityLifecycleCallbacks
 
     @SuppressWarnings(UNUSED_PARAMETERS)
-    protected void notifyOnActivityCreated(T activity, Bundle savedInstanceState) {
+    protected void notifyOnActivityCreated(T activity, Bundle bundle) {
 
     }
 
@@ -138,7 +138,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
     }
 
     @SuppressWarnings(UNUSED_PARAMETERS)
-    protected void notifyOnActivitySaveInstanceState(T activity, Bundle outState) {
+    protected void notifyOnActivitySaveInstanceState(T activity, Bundle bundle) {
 
     }
 

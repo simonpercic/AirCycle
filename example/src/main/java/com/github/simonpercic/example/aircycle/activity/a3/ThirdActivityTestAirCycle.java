@@ -13,9 +13,9 @@ public class ThirdActivityTestAirCycle extends BaseAirCycle<ThirdActivity> {
         super(tActivity);
     }
 
-    @Override protected void notifyOnActivityCreated(ThirdActivity activity, Bundle savedInstanceState) {
+    @Override protected void notifyOnActivityCreated(ThirdActivity activity, Bundle bundle) {
         if (activity.passAirCycleLogger != null) {
-            activity.passAirCycleLogger.onCreate(activity, savedInstanceState);
+            activity.passAirCycleLogger.onCreate(activity, bundle);
         }
     }
 
@@ -43,9 +43,9 @@ public class ThirdActivityTestAirCycle extends BaseAirCycle<ThirdActivity> {
         }
     }
 
-    @Override protected void notifyOnActivitySaveInstanceState(ThirdActivity activity, Bundle outState) {
+    @Override protected void notifyOnActivitySaveInstanceState(ThirdActivity activity, Bundle bundle) {
         if (activity.passAirCycleLogger != null) {
-            activity.passAirCycleLogger.onSaveInstanceState(activity, outState);
+            activity.passAirCycleLogger.onSaveInstanceState(activity, bundle);
         }
     }
 

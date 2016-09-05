@@ -4,6 +4,7 @@ import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.aircycle.BaseAirCycle;
 import com.github.simonpercic.aircycle.model.LifecycleMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
+import com.github.simonpercic.aircycle.model.type.ListenerArg;
 import com.github.simonpercic.collectionhelper.CollectionHelper;
 import com.github.simonpercic.collectionhelper.Predicate;
 import com.squareup.javapoet.ClassName;
@@ -33,6 +34,7 @@ public class ClassGenerator {
 
     private static final String CLASS_SUFFIX = AirCycle.class.getSimpleName();
     private static final String ACTIVITY_PARAM = "activity";
+    private static final String BUNDLE_PARAM = "bundle";
 
     private final Elements elementUtils;
     private final Types typeUtils;
@@ -103,14 +105,46 @@ public class ClassGenerator {
 
         String fieldName = field.getSimpleName().toString();
 
-        // TODO: 04/09/16 add args to call
-
         MethodSpec.Builder methodBuilder = MethodSpec.overriding(baseMethod, declaredType, typeUtils);
         methodBuilder.beginControlFlow("if ($N.$N != null)", ACTIVITY_PARAM, fieldName);
-        methodBuilder.addStatement("$N.$N.$N()", ACTIVITY_PARAM, fieldName, method.getMethodName());
+
+        String paramsCall = paramsCall(method.getArgs());
+        methodBuilder.addStatement("$N.$N.$N$L", ACTIVITY_PARAM, fieldName, method.getMethodName(), paramsCall);
         methodBuilder.endControlFlow();
 
         return methodBuilder.build();
+    }
+
+    private static String paramsCall(List<ListenerArg> methodArgs) {
+        StringBuilder sb = new StringBuilder();
+        sb.append('(');
+
+        if (!CollectionHelper.isEmpty(methodArgs)) {
+            for (int i = 0; i < methodArgs.size(); i++) {
+                ListenerArg arg = methodArgs.get(i);
+
+                if (i > 0) {
+                    sb.append(", ");
+                }
+
+                String argName = argNameForListenerArg(arg);
+                sb.append(argName);
+            }
+        }
+
+        sb.append(')');
+        return sb.toString();
+    }
+
+    private static String argNameForListenerArg(ListenerArg arg) {
+        switch (arg) {
+            case BUNDLE:
+                return BUNDLE_PARAM;
+            case ACTIVITY:
+                return ACTIVITY_PARAM;
+            default:
+                throw new IllegalArgumentException("invalid arg");
+        }
     }
 
     private static String getBaseAirCycleNotifyMethodName(ActivityLifecycle lifecycleType) {

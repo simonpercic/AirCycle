@@ -13,7 +13,7 @@ import static com.google.testing.compile.JavaSourcesSubjectFactory.javaSources;
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class ProvidedListenersTest {
+public class BuiltInListenersTest {
 
     @Test
     public void testActivityAirCycle() throws Exception {

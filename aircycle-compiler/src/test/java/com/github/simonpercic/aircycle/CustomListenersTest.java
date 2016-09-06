@@ -220,4 +220,109 @@ public class CustomListenersTest {
                 .and()
                 .generatesSources(expected);
     }
+
+    @Test
+    public void testMultipleMethods() throws Exception {
+        JavaFileObject input = JavaFileObjects.forSourceString("activity.SampleActivity", "package activity;\n"
+                + "\n"
+                + "import android.app.Activity;\n"
+                + "\n"
+                + "import com.github.simonpercic.aircycle.AirCycle;\n"
+                + "import listener.CustomListener;\n"
+                + "\n"
+                + "public class SampleActivity extends Activity {\n"
+                + "    @AirCycle CustomListener listener;\n"
+                + "}");
+
+        JavaFileObject listener = JavaFileObjects.forSourceString("listener.CustomListener", "package listener;\n"
+                + "\n"
+                + "import android.app.Activity;\n"
+                + "import android.os.Bundle;\n"
+                + "\n"
+                + "public interface CustomListener {\n"
+                + "    void onResume();\n"
+                + "\n"
+                + "    void onStart(Activity act);\n"
+                + "    \n"
+                + "    void onActivityCreated(Activity activity);\n"
+                + "    \n"
+                + "    void onCreate();\n"
+                + "    \n"
+                + "    void onActivityStopped();\n"
+                + "\n"
+                + "    void onActivitySaveInstanceState(Bundle outState);\n"
+                + "\n"
+                + "    void onCreate(Activity a);\n"
+                + "    \n"
+                + "    void onDestroy();\n"
+                + "}");
+
+        JavaFileObject expected = JavaFileObjects.forSourceString("activity.SampleActivityAirCycle",
+                "package activity;\n"
+                        + "\n"
+                        + "import android.os.Bundle;\n"
+                        + "import com.github.simonpercic.aircycle.BaseAirCycle;\n"
+                        + "import java.lang.Override;\n"
+                        + "\n"
+                        + "public class SampleActivityAirCycle extends BaseAirCycle<SampleActivity> {\n"
+                        + "    protected SampleActivityAirCycle(SampleActivity activity) {\n"
+                        + "        super(activity);\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityCreated(SampleActivity activity, Bundle bundle) {\n"
+                        + "        if (activity.listener != null) {\n"
+                        + "            activity.listener.onActivityCreated(activity);\n"
+                        + "            activity.listener.onCreate();\n"
+                        + "            activity.listener.onCreate(activity);\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityStarted(SampleActivity activity) {\n"
+                        + "        if (activity.listener != null) {\n"
+                        + "            activity.listener.onStart(activity);\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityResumed(SampleActivity activity) {\n"
+                        + "        if (activity.listener != null) {\n"
+                        + "            activity.listener.onResume();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityStopped(SampleActivity activity) {\n"
+                        + "        if (activity.listener != null) {\n"
+                        + "            activity.listener.onActivityStopped();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivitySaveInstanceState(SampleActivity activity, Bundle bundle) {\n"
+                        + "        if (activity.listener != null) {\n"
+                        + "            activity.listener.onActivitySaveInstanceState(bundle);\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    @Override\n"
+                        + "    protected void notifyOnActivityDestroyed(SampleActivity activity) {\n"
+                        + "        if (activity.listener != null) {\n"
+                        + "            activity.listener.onDestroy();\n"
+                        + "        }\n"
+                        + "    }\n"
+                        + "\n"
+                        + "    static void bind(SampleActivity activity) {\n"
+                        + "        new SampleActivityAirCycle(activity).registerCallbacks();\n"
+                        + "    }\n"
+                        + "}");
+
+        assertAbout(javaSources())
+                .that(ImmutableList.of(input, listener))
+                .processedWith(new AirCycleProcessor())
+                .compilesWithoutWarnings()
+                .and()
+                .generatesSources(expected);
+    }
 }

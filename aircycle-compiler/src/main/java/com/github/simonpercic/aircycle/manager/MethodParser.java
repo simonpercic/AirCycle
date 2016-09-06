@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.github.simonpercic.aircycle.exception.MethodArgumentsException;
-import com.github.simonpercic.aircycle.model.LifecycleMethod;
+import com.github.simonpercic.aircycle.model.ListenerMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.utils.ElementValidator;
 import com.github.simonpercic.collectionhelper.CollectionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,8 +42,8 @@ public class MethodParser {
         this.typeUtils = typeUtils;
     }
 
-    public List<LifecycleMethod> parseLifecycleMethods(TypeElement element) {
-        List<LifecycleMethod> lifecycleMethods = new ArrayList<>();
+    public Map<ActivityLifecycle, List<ListenerMethod>> parseLifecycleMethods(TypeElement element) {
+        Map<ActivityLifecycle, List<ListenerMethod>> lifecycleMethods = new TreeMap<>();
 
         List<? extends Element> allMembers = elementUtils.getAllMembers(element);
         List<ExecutableElement> allMethods = ElementFilter.methodsIn(allMembers);
@@ -56,7 +58,14 @@ public class MethodParser {
                 return null;
             }
 
-            lifecycleMethods.add(lifecycleMethod);
+            List<ListenerMethod> methods = lifecycleMethods.get(lifecycleMethod.lifecycleType);
+
+            if (methods == null) {
+                methods = new ArrayList<>();
+                lifecycleMethods.put(lifecycleMethod.lifecycleType, methods);
+            }
+
+            methods.add(lifecycleMethod.listenerMethod);
         }
 
         if (lifecycleMethods.size() == 0) {
@@ -100,7 +109,7 @@ public class MethodParser {
             return null;
         }
 
-        LifecycleMethod.Builder builder = LifecycleMethod.builder(activityLifecycle, methodName);
+        ListenerMethod.Builder builder = ListenerMethod.builder(activityLifecycle, methodName);
 
         List<? extends VariableElement> parameters = method.getParameters();
 
@@ -131,7 +140,7 @@ public class MethodParser {
             }
         }
 
-        return builder.build();
+        return new LifecycleMethod(activityLifecycle, builder.build());
     }
 
     private static boolean isLifecycleMethod(ExecutableElement method) {
@@ -168,6 +177,17 @@ public class MethodParser {
                 return ActivityLifecycle.DESTROY;
             default:
                 return null;
+        }
+    }
+
+    static class LifecycleMethod {
+
+        final ActivityLifecycle lifecycleType;
+        final ListenerMethod listenerMethod;
+
+        LifecycleMethod(ActivityLifecycle lifecycleType, ListenerMethod listenerMethod) {
+            this.lifecycleType = lifecycleType;
+            this.listenerMethod = listenerMethod;
         }
     }
 }

@@ -2,7 +2,7 @@ package com.github.simonpercic.aircycle.manager;
 
 import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.aircycle.BaseAirCycle;
-import com.github.simonpercic.aircycle.model.LifecycleMethod;
+import com.github.simonpercic.aircycle.model.ListenerMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.model.type.ListenerArg;
 import com.github.simonpercic.collectionhelper.CollectionHelper;
@@ -13,6 +13,7 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -45,7 +46,7 @@ public class ClassGenerator {
         this.typeUtils = typeUtils;
     }
 
-    public TypeSpec generateClass(VariableElement field, List<LifecycleMethod> methods) {
+    public TypeSpec generateClass(VariableElement field, Map<ActivityLifecycle, List<ListenerMethod>> methods) {
         if (field == null) {
             throw new IllegalArgumentException("field is null");
         }
@@ -76,8 +77,9 @@ public class ClassGenerator {
 
         builder.addMethod(constructor);
 
-        for (LifecycleMethod method : methods) {
-            MethodSpec lifecycleMethod = createLifecycleMethod(method, enclosingElement, field);
+        for (ActivityLifecycle lifecycle : methods.keySet()) {
+            List<ListenerMethod> listenerMethods = methods.get(lifecycle);
+            MethodSpec lifecycleMethod = createLifecycleMethod(lifecycle, listenerMethods, enclosingElement, field);
             builder.addMethod(lifecycleMethod);
         }
 
@@ -92,11 +94,15 @@ public class ClassGenerator {
         return builder.build();
     }
 
-    private MethodSpec createLifecycleMethod(final LifecycleMethod method, TypeElement enclosingElement,
-            VariableElement field) {
+    private MethodSpec createLifecycleMethod(final ActivityLifecycle lifecycle, List<ListenerMethod> listenerMethods,
+            TypeElement enclosingElement, VariableElement field) {
 
-        if (method == null) {
-            throw new IllegalArgumentException("method is null");
+        if (lifecycle == null) {
+            throw new IllegalArgumentException("lifecycle is null");
+        }
+
+        if (CollectionHelper.isEmpty(listenerMethods)) {
+            throw new IllegalArgumentException("listenerMethods is empty");
         }
 
         TypeElement typeElement = elementUtils.getTypeElement(BaseAirCycle.class.getCanonicalName());
@@ -107,7 +113,7 @@ public class ClassGenerator {
 
         ExecutableElement baseMethod = CollectionHelper.first(allMethods, new Predicate<ExecutableElement>() {
             @Override public boolean apply(ExecutableElement object) {
-                String methodName = getBaseAirCycleNotifyMethodName(method.getLifecycleType());
+                String methodName = getBaseAirCycleNotifyMethodName(lifecycle);
                 return object.getSimpleName().toString().equals(methodName);
             }
         });
@@ -117,8 +123,11 @@ public class ClassGenerator {
         MethodSpec.Builder methodBuilder = MethodSpec.overriding(baseMethod, declaredType, typeUtils);
         methodBuilder.beginControlFlow("if ($N.$N != null)", ACTIVITY_PARAM, fieldName);
 
-        String paramsCall = paramsCall(method.getArgs());
-        methodBuilder.addStatement("$N.$N.$N$L", ACTIVITY_PARAM, fieldName, method.getMethodName(), paramsCall);
+        for (ListenerMethod method : listenerMethods) {
+            String paramsCall = paramsCall(method.getArgs());
+            methodBuilder.addStatement("$N.$N.$N$L", ACTIVITY_PARAM, fieldName, method.getMethodName(), paramsCall);
+        }
+
         methodBuilder.endControlFlow();
 
         return methodBuilder.build();

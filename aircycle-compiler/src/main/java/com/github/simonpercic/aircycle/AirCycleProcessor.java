@@ -3,15 +3,17 @@ package com.github.simonpercic.aircycle;
 import com.github.simonpercic.aircycle.dagger.DaggerProcessorComponent;
 import com.github.simonpercic.aircycle.dagger.ProcessorModule;
 import com.github.simonpercic.aircycle.manager.ClassFileWriter;
+import com.github.simonpercic.aircycle.manager.ClassGenerator;
 import com.github.simonpercic.aircycle.manager.FieldValidator;
 import com.github.simonpercic.aircycle.manager.MethodParser;
-import com.github.simonpercic.aircycle.model.LifecycleMethod;
-import com.github.simonpercic.aircycle.manager.ClassGenerator;
+import com.github.simonpercic.aircycle.model.ListenerMethod;
+import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.TypeSpec;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -67,7 +69,7 @@ public class AirCycleProcessor extends AbstractProcessor {
             DeclaredType declaredType = (DeclaredType) field.asType();
             TypeElement element = (TypeElement) declaredType.asElement();
 
-            List<LifecycleMethod> methods = methodParser.parseLifecycleMethods(element);
+            Map<ActivityLifecycle, List<ListenerMethod>> methods = methodParser.parseLifecycleMethods(element);
             if (methods == null) {
                 return true;
             }

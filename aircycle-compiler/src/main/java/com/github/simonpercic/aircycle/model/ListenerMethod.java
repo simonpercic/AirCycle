@@ -4,6 +4,7 @@ import com.github.simonpercic.aircycle.exception.MethodArgumentsException;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.model.type.ListenerArg;
 import com.github.simonpercic.aircycle.utils.StringUtils;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +12,14 @@ import java.util.List;
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class LifecycleMethod {
+public class ListenerMethod {
 
-    private final ActivityLifecycle lifecycleType;
     private final String methodName;
     private final List<ListenerArg> args;
 
-    private LifecycleMethod(ActivityLifecycle lifecycleType, String methodName, List<ListenerArg> args) {
-        this.lifecycleType = lifecycleType;
+    public ListenerMethod(String methodName, List<ListenerArg> args) {
         this.methodName = methodName;
-        this.args = args;
-    }
-
-    public ActivityLifecycle getLifecycleType() {
-        return lifecycleType;
+        this.args = ImmutableList.copyOf(args);
     }
 
     public String getMethodName() {
@@ -89,8 +84,8 @@ public class LifecycleMethod {
             return this;
         }
 
-        public LifecycleMethod build() {
-            return new LifecycleMethod(lifecycleType, methodName, args);
+        public ListenerMethod build() {
+            return new ListenerMethod(methodName, args);
         }
     }
 }

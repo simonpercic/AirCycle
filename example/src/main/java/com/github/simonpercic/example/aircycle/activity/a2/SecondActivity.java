@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.example.aircycle.R;
+import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
 import com.github.simonpercic.example.aircycle.logger.ActivityBundleAirCycleLogger;
 
 /**
@@ -14,6 +15,7 @@ import com.github.simonpercic.example.aircycle.logger.ActivityBundleAirCycleLogg
  */
 public class SecondActivity extends AppCompatActivity {
 
+    @AirCycle final ActivityAirCycleLogger airCycleLogger = new ActivityAirCycleLogger();
     @AirCycle final ActivityBundleAirCycleLogger bundleAirCycleLogger = new ActivityBundleAirCycleLogger();
 
     @Override

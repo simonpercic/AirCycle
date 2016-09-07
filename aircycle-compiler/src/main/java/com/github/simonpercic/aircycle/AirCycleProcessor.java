@@ -6,15 +6,19 @@ import com.github.simonpercic.aircycle.manager.ClassFileWriter;
 import com.github.simonpercic.aircycle.manager.ClassGenerator;
 import com.github.simonpercic.aircycle.manager.FieldValidator;
 import com.github.simonpercic.aircycle.manager.MethodParser;
+import com.github.simonpercic.aircycle.model.FieldListenerMethods;
 import com.github.simonpercic.aircycle.model.ListenerMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.TypeSpec;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -60,22 +64,55 @@ public class AirCycleProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        Map<TypeElement, List<VariableElement>> enclosingElements = new HashMap<>();
+
         for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(AirCycle.class)) {
             VariableElement field = (VariableElement) annotatedElement;
             if (!fieldValidator.isFieldValid(field)) {
                 return true;
             }
 
-            DeclaredType declaredType = (DeclaredType) field.asType();
-            TypeElement element = (TypeElement) declaredType.asElement();
+            TypeElement enclosingElement = (TypeElement) field.getEnclosingElement();
 
-            Map<ActivityLifecycle, List<ListenerMethod>> methods = methodParser.parseLifecycleMethods(element);
-            if (methods == null) {
-                return true;
+            List<VariableElement> fields = enclosingElements.get(enclosingElement);
+            if (fields == null) {
+                fields = new ArrayList<>();
+                enclosingElements.put(enclosingElement, fields);
             }
 
-            TypeSpec typeSpec = classGenerator.generateClass(field, methods);
-            classFileWriter.writeClass(typeSpec, (TypeElement) field.getEnclosingElement());
+            fields.add(field);
+        }
+
+        for (TypeElement enclosingElement : enclosingElements.keySet()) {
+            Map<ActivityLifecycle, List<FieldListenerMethods>> lifecycleListenerMethods = new TreeMap<>();
+
+            List<VariableElement> fields = enclosingElements.get(enclosingElement);
+            for (VariableElement field : fields) {
+                DeclaredType declaredType = (DeclaredType) field.asType();
+                TypeElement element = (TypeElement) declaredType.asElement();
+
+                Map<ActivityLifecycle, List<ListenerMethod>> methods = methodParser.parseLifecycleMethods(element);
+                if (methods == null) {
+                    return true;
+                }
+
+                for (ActivityLifecycle lifecycle : methods.keySet()) {
+                    List<FieldListenerMethods> fieldListenerMethods = lifecycleListenerMethods.get(lifecycle);
+                    if (fieldListenerMethods == null) {
+                        fieldListenerMethods = new ArrayList<>();
+                        lifecycleListenerMethods.put(lifecycle, fieldListenerMethods);
+                    }
+
+                    fieldListenerMethods.add(new FieldListenerMethods(field, methods.get(lifecycle)));
+                }
+            }
+
+            TypeSpec typeSpec = classGenerator.generateClass(enclosingElement, lifecycleListenerMethods);
+
+            boolean success = classFileWriter.writeClass(typeSpec, enclosingElement);
+            if (!success) {
+                return true;
+            }
         }
 
         return true;

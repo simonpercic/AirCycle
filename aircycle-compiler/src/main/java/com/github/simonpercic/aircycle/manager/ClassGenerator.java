@@ -2,6 +2,7 @@ package com.github.simonpercic.aircycle.manager;
 
 import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.aircycle.BaseAirCycle;
+import com.github.simonpercic.aircycle.model.FieldListenerMethods;
 import com.github.simonpercic.aircycle.model.ListenerMethod;
 import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
 import com.github.simonpercic.aircycle.model.type.ListenerArg;
@@ -21,7 +22,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
@@ -46,16 +46,16 @@ public class ClassGenerator {
         this.typeUtils = typeUtils;
     }
 
-    public TypeSpec generateClass(VariableElement field, Map<ActivityLifecycle, List<ListenerMethod>> methods) {
-        if (field == null) {
-            throw new IllegalArgumentException("field is null");
+    public TypeSpec generateClass(TypeElement enclosingElement,
+            Map<ActivityLifecycle, List<FieldListenerMethods>> methods) {
+        if (enclosingElement == null) {
+            throw new IllegalArgumentException("enclosingElement is null");
         }
 
         if (methods == null) {
             throw new IllegalArgumentException("methods list is null");
         }
 
-        TypeElement enclosingElement = (TypeElement) field.getEnclosingElement();
         ClassName enclosingActivityClass = ClassName.get(enclosingElement);
         String activityName = enclosingElement.getSimpleName().toString();
 
@@ -78,8 +78,8 @@ public class ClassGenerator {
         builder.addMethod(constructor);
 
         for (ActivityLifecycle lifecycle : methods.keySet()) {
-            List<ListenerMethod> listenerMethods = methods.get(lifecycle);
-            MethodSpec lifecycleMethod = createLifecycleMethod(lifecycle, listenerMethods, enclosingElement, field);
+            List<FieldListenerMethods> fieldListenerMethods = methods.get(lifecycle);
+            MethodSpec lifecycleMethod = createLifecycleMethod(lifecycle, fieldListenerMethods, enclosingElement);
             builder.addMethod(lifecycleMethod);
         }
 
@@ -94,15 +94,17 @@ public class ClassGenerator {
         return builder.build();
     }
 
-    private MethodSpec createLifecycleMethod(final ActivityLifecycle lifecycle, List<ListenerMethod> listenerMethods,
-            TypeElement enclosingElement, VariableElement field) {
+    private MethodSpec createLifecycleMethod(
+            final ActivityLifecycle lifecycle,
+            List<FieldListenerMethods> fieldListenerMethods,
+            TypeElement enclosingElement) {
 
         if (lifecycle == null) {
             throw new IllegalArgumentException("lifecycle is null");
         }
 
-        if (CollectionHelper.isEmpty(listenerMethods)) {
-            throw new IllegalArgumentException("listenerMethods is empty");
+        if (CollectionHelper.isEmpty(fieldListenerMethods)) {
+            throw new IllegalArgumentException("fieldListenerMethods is empty");
         }
 
         TypeElement typeElement = elementUtils.getTypeElement(BaseAirCycle.class.getCanonicalName());
@@ -118,17 +120,21 @@ public class ClassGenerator {
             }
         });
 
-        String fieldName = field.getSimpleName().toString();
-
         MethodSpec.Builder methodBuilder = MethodSpec.overriding(baseMethod, declaredType, typeUtils);
-        methodBuilder.beginControlFlow("if ($N.$N != null)", ACTIVITY_PARAM, fieldName);
 
-        for (ListenerMethod method : listenerMethods) {
-            String paramsCall = paramsCall(method.getArgs());
-            methodBuilder.addStatement("$N.$N.$N$L", ACTIVITY_PARAM, fieldName, method.getMethodName(), paramsCall);
+        for (FieldListenerMethods listenerMethod : fieldListenerMethods) {
+            String fieldName = listenerMethod.getField().getSimpleName().toString();
+
+            methodBuilder.beginControlFlow("if ($N.$N != null)", ACTIVITY_PARAM, fieldName);
+
+            for (ListenerMethod method : listenerMethod.getListenerMethods()) {
+                String paramsCall = paramsCall(method.getArgs());
+                methodBuilder.addStatement("$N.$N.$N$L", ACTIVITY_PARAM, fieldName, method.getMethodName(), paramsCall);
+            }
+
+            methodBuilder.endControlFlow();
         }
 
-        methodBuilder.endControlFlow();
 
         return methodBuilder.build();
     }

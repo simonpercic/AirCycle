@@ -29,10 +29,10 @@ subprojects {
 
     project.ext {
         androidVersion = '4.1.1.4'
-        compileSdkVersion = 23
-        buildToolsVersion = '23.0.2'
+        compileSdkVersion = 24
+        buildToolsVersion = '24.0.2'
         minSdkVersion = 15
-        targetSdkVersion = 23
-        supportVersion = '23.4.0'
+        targetSdkVersion = 24
+        supportVersion = '24.2.0'
     }
 }

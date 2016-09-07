@@ -15,6 +15,9 @@ import com.github.simonpercic.example.aircycle.activity.a7.CustomListenerActivit
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

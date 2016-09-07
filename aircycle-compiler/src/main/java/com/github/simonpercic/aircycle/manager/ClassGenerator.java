@@ -37,6 +37,11 @@ public class ClassGenerator {
     private static final String ACTIVITY_PARAM = "activity";
     private static final String BUNDLE_PARAM = "bundle";
 
+    private static final String CLASS_COMMENT = "Generated class from AirCycle, do not modify.\n"
+            + "See: https://github.com/simonpercic/AirCycle\n"
+            + "\n"
+            + "@author Simon Percic <a href=\"https://github.com/simonpercic\">https://github.com/simonpercic</a>\n";
+
     private final Elements elementUtils;
     private final Types typeUtils;
 
@@ -62,12 +67,11 @@ public class ClassGenerator {
         ParameterizedTypeName superClass = ParameterizedTypeName.get(ClassName.get(BaseAirCycle.class),
                 enclosingActivityClass);
 
-        // TODO: 04/09/16 add comment to generated class
-
         String className = activityName + CLASS_SUFFIX;
         TypeSpec.Builder builder = TypeSpec.classBuilder(className)
                 .addModifiers(Modifier.PUBLIC)
-                .superclass(superClass);
+                .superclass(superClass)
+                .addJavadoc(CLASS_COMMENT);
 
         MethodSpec constructor = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PROTECTED)

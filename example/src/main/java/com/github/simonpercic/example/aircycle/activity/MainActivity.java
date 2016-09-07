@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.github.simonpercic.example.aircycle.R;
-import com.github.simonpercic.example.aircycle.activity.a1.FirstActivity;
-import com.github.simonpercic.example.aircycle.activity.a2.SecondActivity;
-import com.github.simonpercic.example.aircycle.activity.a3.ThirdActivity;
-import com.github.simonpercic.example.aircycle.activity.a4.FourthActivity;
-import com.github.simonpercic.example.aircycle.activity.a5.FifthActivity;
-import com.github.simonpercic.example.aircycle.activity.a6.SixthActivity;
-import com.github.simonpercic.example.aircycle.activity.a7.SeventhActivity;
+import com.github.simonpercic.example.aircycle.activity.a1.ListenerActivity;
+import com.github.simonpercic.example.aircycle.activity.a2.BundleListenerActivity;
+import com.github.simonpercic.example.aircycle.activity.a3.PassListenerActivity;
+import com.github.simonpercic.example.aircycle.activity.a4.LifecycleCallbacksActivity;
+import com.github.simonpercic.example.aircycle.activity.a5.NullListenerActivity;
+import com.github.simonpercic.example.aircycle.activity.a6.MultipleListenersActivity;
+import com.github.simonpercic.example.aircycle.activity.a7.CustomListenerActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,31 +24,31 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btn_open_first) void onBtnOpenFirstClicked() {
-        startActivity(FirstActivity.getIntent(this));
+    @OnClick(R.id.btn_open_listener) void onBtnOpenListenerClicked() {
+        startActivity(ListenerActivity.getIntent(this));
     }
 
-    @OnClick(R.id.btn_open_second) void onBtnOpenSecondClicked() {
-        startActivity(SecondActivity.getIntent(this));
+    @OnClick(R.id.btn_open_bundle_listener) void onBtnOpenBundleListenerClicked() {
+        startActivity(BundleListenerActivity.getIntent(this));
     }
 
-    @OnClick(R.id.btn_open_third) void onBtnOpenThirdClicked() {
-        startActivity(ThirdActivity.getIntent(this));
+    @OnClick(R.id.btn_open_pass_listener) void onBtnOpenPassListenerClicked() {
+        startActivity(PassListenerActivity.getIntent(this));
     }
 
-    @OnClick(R.id.btn_open_fourth) void onBtnOpenFourthClicked() {
-        startActivity(FourthActivity.getIntent(this));
+    @OnClick(R.id.btn_open_lifecycle_callbacks) void onBtnOpenLifecycleCallbacksClicked() {
+        startActivity(LifecycleCallbacksActivity.getIntent(this));
     }
 
-    @OnClick(R.id.btn_open_fifth) void onBtnOpenFifthClicked() {
-        startActivity(FifthActivity.getIntent(this));
+    @OnClick(R.id.btn_open_null_listener) void onBtnOpenNullListenerClicked() {
+        startActivity(NullListenerActivity.getIntent(this));
     }
 
-    @OnClick(R.id.btn_open_sixth) void onBtnOpenSixthClicked() {
-        startActivity(SixthActivity.getIntent(this));
+    @OnClick(R.id.btn_open_multiple_listeners) void onBtnOpenMultipleListenersClicked() {
+        startActivity(MultipleListenersActivity.getIntent(this));
     }
 
-    @OnClick(R.id.btn_open_seventh) void onBtnOpenSeventhClicked() {
-        startActivity(SeventhActivity.getIntent(this));
+    @OnClick(R.id.btn_open_custom_listener) void onBtnOpenCustomListenerClicked() {
+        startActivity(CustomListenerActivity.getIntent(this));
     }
 }

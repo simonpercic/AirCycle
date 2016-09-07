@@ -13,38 +13,38 @@
     tools:context=".activity.MainActivity">
 
     <Button
-        android:id="@+id/btn_open_first"
+        android:id="@+id/btn_open_listener"
         style="@style/Button"
-        android:text="@string/first_activity" />
+        android:text="@string/listener_activity" />
 
     <Button
-        android:id="@+id/btn_open_second"
+        android:id="@+id/btn_open_bundle_listener"
         style="@style/Button"
-        android:text="@string/second_activity" />
+        android:text="@string/bundle_listener_activity" />
 
     <Button
-        android:id="@+id/btn_open_third"
+        android:id="@+id/btn_open_pass_listener"
         style="@style/Button"
-        android:text="@string/third_activity" />
+        android:text="@string/pass_listener_activity" />
 
     <Button
-        android:id="@+id/btn_open_fourth"
+        android:id="@+id/btn_open_lifecycle_callbacks"
         style="@style/Button"
-        android:text="@string/fourth_activity" />
+        android:text="@string/lifecycle_callbacks_activity" />
 
     <Button
-        android:id="@+id/btn_open_fifth"
+        android:id="@+id/btn_open_null_listener"
         style="@style/Button"
-        android:text="@string/fifth_activity" />
+        android:text="@string/null_listener_activity" />
 
     <Button
-        android:id="@+id/btn_open_sixth"
+        android:id="@+id/btn_open_multiple_listeners"
         style="@style/Button"
-        android:text="@string/sixth_activity" />
+        android:text="@string/multiple_listeners_activity" />
 
     <Button
-        android:id="@+id/btn_open_seventh"
+        android:id="@+id/btn_open_custom_listener"
         style="@style/Button"
-        android:text="@string/seventh_activity" />
+        android:text="@string/custom_listener_activity" />
 
 </LinearLayout>

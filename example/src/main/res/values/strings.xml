@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">AirCycle Example</string>
 
-    <string name="first_activity">1st Activity</string>
-    <string name="second_activity">2nd Activity</string>
-    <string name="third_activity">3rd Activity</string>
-    <string name="fourth_activity">4th Activity</string>
-    <string name="fifth_activity">5th Activity</string>
-    <string name="sixth_activity">6th Activity</string>
-    <string name="seventh_activity">7th Activity</string>
+    <string name="listener_activity">Activity AirCycle</string>
+    <string name="bundle_listener_activity">Activity Bundle AirCycle</string>
+    <string name="pass_listener_activity">Activity Pass AirCycle</string>
+    <string name="lifecycle_callbacks_activity">Activity LifecycleCallbacks</string>
+    <string name="null_listener_activity">Null Listener Activity</string>
+    <string name="multiple_listeners_activity">Multiple Listeners Activity</string>
+    <string name="custom_listener_activity">Custom Listener Activity</string>
 </resources>

@@ -12,19 +12,19 @@ import com.github.simonpercic.example.aircycle.logger.ActivityPassAirCycleLogger
 /**
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class ThirdActivity extends AppCompatActivity {
+public class PassListenerActivity extends AppCompatActivity {
 
-    @AirCycle ActivityPassAirCycleLogger<ThirdActivity> passAirCycleLogger;
+    @AirCycle ActivityPassAirCycleLogger<PassListenerActivity> passAirCycleLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThirdActivityAirCycle.bind(this);
+        PassListenerActivityAirCycle.bind(this);
         passAirCycleLogger = new ActivityPassAirCycleLogger<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
     }
 
     public static Intent getIntent(Context context) {
-        return new Intent(context, ThirdActivity.class);
+        return new Intent(context, PassListenerActivity.class);
     }
 }

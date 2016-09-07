@@ -23,32 +23,32 @@
         </activity>
 
         <activity
-            android:name=".activity.a1.FirstActivity"
-            android:label="@string/first_activity" />
+            android:name=".activity.a1.ListenerActivity"
+            android:label="@string/listener_activity" />
 
         <activity
-            android:name=".activity.a2.SecondActivity"
-            android:label="@string/second_activity" />
+            android:name=".activity.a2.BundleListenerActivity"
+            android:label="@string/bundle_listener_activity" />
 
         <activity
-            android:name=".activity.a3.ThirdActivity"
-            android:label="@string/third_activity" />
+            android:name=".activity.a3.PassListenerActivity"
+            android:label="@string/pass_listener_activity" />
 
         <activity
-            android:name=".activity.a4.FourthActivity"
-            android:label="@string/fourth_activity" />
+            android:name=".activity.a4.LifecycleCallbacksActivity"
+            android:label="@string/lifecycle_callbacks_activity" />
 
         <activity
-            android:name=".activity.a5.FifthActivity"
-            android:label="@string/fifth_activity" />
+            android:name=".activity.a5.NullListenerActivity"
+            android:label="@string/null_listener_activity" />
 
         <activity
-            android:name=".activity.a6.SixthActivity"
-            android:label="@string/sixth_activity" />
+            android:name=".activity.a6.MultipleListenersActivity"
+            android:label="@string/multiple_listeners_activity" />
 
         <activity
-            android:name=".activity.a7.SeventhActivity"
-            android:label="@string/seventh_activity" />
+            android:name=".activity.a7.CustomListenerActivity"
+            android:label="@string/custom_listener_activity" />
 
     </application>
 

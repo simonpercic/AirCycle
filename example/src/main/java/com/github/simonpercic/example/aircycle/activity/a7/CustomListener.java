@@ -15,7 +15,7 @@ public class CustomListener {
         Timber.d("onCreate");
     }
 
-    public void onCreate(SeventhActivity activity) {
+    public void onCreate(CustomListenerActivity activity) {
         Timber.d("onCreate activity: %s", activity);
     }
 

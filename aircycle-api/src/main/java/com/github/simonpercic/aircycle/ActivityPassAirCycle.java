@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
+ * ActivityPassAirCycle Activity-typed listener interface.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public interface ActivityPassAirCycle<T extends Activity> {

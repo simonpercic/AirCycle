@@ -10,6 +10,8 @@ import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
 
 /**
+ * Example Activity with a null listener instance.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class NullListenerActivity extends AppCompatActivity {

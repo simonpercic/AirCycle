@@ -10,6 +10,9 @@ import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
 
 /**
+ * Example Activity showing usage of AirCycle's provided ActivityAirCycle listener.
+ * In this example, the listener instance is created after bind at the end of onCreate()
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class ListenerActivity extends AppCompatActivity {

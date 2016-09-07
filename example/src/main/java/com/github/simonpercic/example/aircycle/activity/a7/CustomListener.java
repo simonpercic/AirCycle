@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import timber.log.Timber;
 
 /**
+ * Custom listener logger.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class CustomListener {

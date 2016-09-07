@@ -5,6 +5,8 @@ import android.app.Application.ActivityLifecycleCallbacks;
 import android.os.Bundle;
 
 /**
+ * BaseAirCycle base listener.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecycleCallbacks {

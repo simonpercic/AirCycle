@@ -5,6 +5,8 @@ import com.github.simonpercic.aircycle.ActivityAirCycle;
 import timber.log.Timber;
 
 /**
+ * ActivityAirCycle logger.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class ActivityAirCycleLogger implements ActivityAirCycle {

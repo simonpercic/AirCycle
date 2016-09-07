@@ -4,6 +4,8 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 
 /**
+ * Element validator utils.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public final class ElementValidator {

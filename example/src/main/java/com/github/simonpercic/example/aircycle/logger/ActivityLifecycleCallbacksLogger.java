@@ -7,6 +7,8 @@ import android.os.Bundle;
 import timber.log.Timber;
 
 /**
+ * ActivityLifecycleCallbacks logger.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class ActivityLifecycleCallbacksLogger implements ActivityLifecycleCallbacks {

@@ -7,6 +7,8 @@ import com.github.simonpercic.aircycle.ActivityBundleAirCycle;
 import timber.log.Timber;
 
 /**
+ * ActivityBundleAirCycle logger.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class ActivityBundleAirCycleLogger implements ActivityBundleAirCycle {

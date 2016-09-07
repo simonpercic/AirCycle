@@ -1,6 +1,8 @@
 package com.github.simonpercic.aircycle;
 
 /**
+ * ActivityAirCycle listener interface.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public interface ActivityAirCycle {

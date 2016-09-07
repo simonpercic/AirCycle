@@ -7,6 +7,8 @@ import javax.lang.model.element.Element;
 import javax.tools.Diagnostic.Kind;
 
 /**
+ * Annotation processor logger.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Singleton

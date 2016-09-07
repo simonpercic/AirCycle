@@ -9,6 +9,8 @@ import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.example.aircycle.R;
 
 /**
+ * Example Activity showing usage of a custom listener.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class CustomListenerActivity extends AppCompatActivity {

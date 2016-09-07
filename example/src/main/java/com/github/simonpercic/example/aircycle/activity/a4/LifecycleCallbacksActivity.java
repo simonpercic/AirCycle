@@ -10,6 +10,8 @@ import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityLifecycleCallbacksLogger;
 
 /**
+ * Example Activity showing usage of Android's built-in ActivityLifecycleCallbacks listener.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class LifecycleCallbacksActivity extends AppCompatActivity {

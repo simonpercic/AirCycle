@@ -8,6 +8,8 @@ import timber.log.Timber;
 import timber.log.Timber.DebugTree;
 
 /**
+ * Application.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class App extends Application {

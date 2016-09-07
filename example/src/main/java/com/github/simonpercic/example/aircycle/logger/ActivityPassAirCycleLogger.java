@@ -8,6 +8,8 @@ import com.github.simonpercic.aircycle.ActivityPassAirCycle;
 import timber.log.Timber;
 
 /**
+ * ActivityPassAirCycle typed logger.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class ActivityPassAirCycleLogger<T extends Activity> implements ActivityPassAirCycle<T> {

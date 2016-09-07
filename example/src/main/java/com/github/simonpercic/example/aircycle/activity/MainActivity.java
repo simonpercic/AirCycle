@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * Main example app Activity.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class MainActivity extends AppCompatActivity {

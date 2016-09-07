@@ -32,6 +32,8 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 
 /**
+ * AirCycle annotation processor.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @AutoService(Processor.class)

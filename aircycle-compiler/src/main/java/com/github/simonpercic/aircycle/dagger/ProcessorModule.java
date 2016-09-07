@@ -11,6 +11,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
+ * Annotation processor Dagger module.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Module

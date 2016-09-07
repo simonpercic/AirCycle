@@ -11,6 +11,8 @@ import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
 import com.github.simonpercic.example.aircycle.logger.ActivityBundleAirCycleLogger;
 
 /**
+ * Example Activity showing usage of multiple listeners annotated with AirCycle in the same Activity.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class MultipleListenersActivity extends AppCompatActivity {

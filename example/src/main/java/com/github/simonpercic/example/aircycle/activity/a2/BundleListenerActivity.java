@@ -10,6 +10,9 @@ import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityBundleAirCycleLogger;
 
 /**
+ * Example Activity showing usage of AirCycle's provided ActivityBundleAirCycle listener.
+ * In this example, the listener instance is final
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class BundleListenerActivity extends AppCompatActivity {

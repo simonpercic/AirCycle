@@ -28,6 +28,8 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
 /**
+ * AirCycle listener class type spec generator.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Singleton

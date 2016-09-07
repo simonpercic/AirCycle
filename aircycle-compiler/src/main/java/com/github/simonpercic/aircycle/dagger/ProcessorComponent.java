@@ -7,6 +7,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 /**
+ * Annotation processor Dagger component.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Singleton

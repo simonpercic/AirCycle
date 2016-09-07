@@ -11,6 +11,8 @@ import static com.google.common.truth.Truth.assertAbout;
 import static com.google.testing.compile.JavaSourcesSubjectFactory.javaSources;
 
 /**
+ * Custom listeners test.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public class CustomListenersTest {

@@ -26,6 +26,8 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
 /**
+ * Listener method parser.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Singleton

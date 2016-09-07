@@ -3,6 +3,8 @@ package com.github.simonpercic.aircycle;
 import android.os.Bundle;
 
 /**
+ * ActivityBundleAirCycle listener interface.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 public interface ActivityBundleAirCycle {

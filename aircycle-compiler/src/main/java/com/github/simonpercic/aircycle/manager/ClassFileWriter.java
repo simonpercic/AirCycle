@@ -13,6 +13,8 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
 /**
+ * Class type spec Java file writer.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Singleton

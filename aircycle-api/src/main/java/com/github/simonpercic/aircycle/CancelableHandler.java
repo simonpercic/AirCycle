@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 /**
+ * Cancelable handler.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 class CancelableHandler {

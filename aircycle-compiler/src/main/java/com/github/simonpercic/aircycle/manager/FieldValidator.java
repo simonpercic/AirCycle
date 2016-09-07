@@ -16,6 +16,8 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
 /**
+ * Listener field validator.
+ *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
 @Singleton

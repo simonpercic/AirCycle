@@ -9,6 +9,8 @@ import com.github.simonpercic.example.aircycle.activity.a2.SecondActivity;
 import com.github.simonpercic.example.aircycle.activity.a3.ThirdActivity;
 import com.github.simonpercic.example.aircycle.activity.a4.FourthActivity;
 import com.github.simonpercic.example.aircycle.activity.a5.FifthActivity;
+import com.github.simonpercic.example.aircycle.activity.a6.SixthActivity;
+import com.github.simonpercic.example.aircycle.activity.a7.SeventhActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -40,5 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_open_fifth) void onBtnOpenFifthClicked() {
         startActivity(FifthActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.btn_open_sixth) void onBtnOpenSixthClicked() {
+        startActivity(SixthActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.btn_open_seventh) void onBtnOpenSeventhClicked() {
+        startActivity(SeventhActivity.getIntent(this));
     }
 }

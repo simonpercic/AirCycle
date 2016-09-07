@@ -42,6 +42,14 @@
             android:name=".activity.a5.FifthActivity"
             android:label="@string/fifth_activity" />
 
+        <activity
+            android:name=".activity.a6.SixthActivity"
+            android:label="@string/sixth_activity" />
+
+        <activity
+            android:name=".activity.a7.SeventhActivity"
+            android:label="@string/seventh_activity" />
+
     </application>
 
 </manifest>

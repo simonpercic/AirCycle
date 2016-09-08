@@ -31,7 +31,7 @@ subprojects {
         androidVersion = '4.1.1.4'
         compileSdkVersion = 24
         buildToolsVersion = '24.0.2'
-        minSdkVersion = 15
+        minSdkVersion = 14
         targetSdkVersion = 24
         supportVersion = '24.2.0'
     }

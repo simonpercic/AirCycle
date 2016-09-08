@@ -41,7 +41,7 @@ public class MultipleListenersTest {
                         + "\n"
                         + "import java.lang.Override;\n"
                         + "\n"
-                        + "public class SampleActivityAirCycle extends BaseAirCycle<SampleActivity> {\n"
+                        + "class SampleActivityAirCycle extends BaseAirCycle<SampleActivity> {\n"
                         + "    protected SampleActivityAirCycle(SampleActivity activity) {\n"
                         + "        super(activity);\n"
                         + "    }\n"

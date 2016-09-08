@@ -71,7 +71,6 @@ public class ClassGenerator {
 
         String className = activityName + CLASS_SUFFIX;
         TypeSpec.Builder builder = TypeSpec.classBuilder(className)
-                .addModifiers(Modifier.PUBLIC)
                 .superclass(superClass)
                 .addJavadoc(CLASS_COMMENT);
 

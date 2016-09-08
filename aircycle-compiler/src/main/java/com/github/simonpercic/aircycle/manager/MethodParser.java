@@ -71,9 +71,17 @@ public class MethodParser {
         }
 
         if (lifecycleMethods.size() == 0) {
-            // TODO: 04/09/16 detailed error message
-            String message = String.format("`%s` does not contain any Activity lifecycle methods.",
-                    element.getQualifiedName());
+            String validMethods = "Valid lifecycle methods are: \n"
+                    + "onCreate() / onActivityCreated(), \n"
+                    + "onStart() / onActivityStarted(), \n"
+                    + "onResume() / onActivityResumed(), \n"
+                    + "onPause() / onActivityPaused(), \n"
+                    + "onStop() / onActivityStopped(), \n"
+                    + "onSaveInstanceState() / onActivitySaveInstanceState(), \n"
+                    + "onDestroy() / onActivityDestroyed()";
+
+            String message = String.format("`%s` does not contain any Activity lifecycle methods. %s",
+                    element.getQualifiedName(), validMethods);
 
             logger.w(message, element);
         }

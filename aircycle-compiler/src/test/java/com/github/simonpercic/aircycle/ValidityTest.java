@@ -124,4 +124,35 @@ public class ValidityTest {
                 .processedWith(new AirCycleProcessor())
                 .compilesWithoutWarnings();
     }
+
+    @Test
+    public void testNoListenerMethods() throws Exception {
+        JavaFileObject input = JavaFileObjects.forSourceString("activity.SampleActivity", "package activity;\n"
+                + "\n"
+                + "import android.app.Activity;\n"
+                + "\n"
+                + "import com.github.simonpercic.aircycle.AirCycle;\n"
+                + "\n"
+                + "import listener.InvalidListener;\n"
+                + "\n"
+                + "public class SampleActivity extends Activity {\n"
+                + "    @AirCycle InvalidListener airCycle;\n"
+                + "}");
+
+        JavaFileObject listener = JavaFileObjects.forSourceString("listener.InvalidListener", "package listener;\n"
+                + "\n"
+                + "public interface InvalidListener {\n"
+                + "    \n"
+                + "    void someMethod();\n"
+                + "\n"
+                + "    void someOtherMethod();\n"
+                + "}");
+
+        assertAbout(javaSources())
+                .that(ImmutableList.of(input, listener))
+                .processedWith(new AirCycleProcessor())
+                .compilesWithoutError()
+                .withWarningContaining("`listener.InvalidListener` does not contain any Activity lifecycle methods."
+                        + " Valid lifecycle methods are");
+    }
 }

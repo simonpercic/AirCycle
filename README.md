@@ -67,8 +67,7 @@ public class LifecycleListener {
 
 AirCycle annotation processor will generate a binding class for the Activity, named &lt;YourActivity&gt;AirCycle with a static `bind` method.
 
-You **MUST** call `MyActivityAirCycle.bind(this)` BEFORE calling `super.onCreate(savedInstanceState)`. 
-Otherwise the bound listener WON'T receive the first onCreate call for the Activity.
+You **MUST** call `MyActivityAirCycle.bind(this)` BEFORE calling `super.onCreate(savedInstanceState)`, otherwise the bound listener will NOT receive the first onCreate call for the Activity.
 
 ## Activity lifecycle callbacks
 

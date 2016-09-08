@@ -15,7 +15,7 @@ import com.github.simonpercic.example.aircycle.R;
  */
 public class CustomListenerActivity extends AppCompatActivity {
 
-    @AirCycle final CustomListener bundleAirCycleLogger = new CustomListener();
+    @AirCycle final CustomListener customListener = new CustomListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

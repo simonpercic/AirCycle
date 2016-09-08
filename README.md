@@ -90,12 +90,12 @@ Method name defines the bound Activity lifecycle callback.
 
  lifecycle callback   | listener method      | alternative listener method  | optional Bundle arg?
 ----------------------|----------------------|------------------------------|--------------------------
-onCreate()            |onCreate()            |onActivityCreated()           | :white_check_mark:
+onCreate()            |onCreate()            |onActivityCreated()           | &#10003;
 onStart()             |onStart()             |onActivityStarted()           | -
 onResume()            |onResume()            |onActivityResumed()           | -
 onPause()             |onPause()             |onActivityPaused()            | -
 onStop()              |onStop()              |onActivityStopped()           | -
-onSaveInstanceState() |onSaveInstanceState() |onActivitySaveInstanceState() | &#x2713;
+onSaveInstanceState() |onSaveInstanceState() |onActivitySaveInstanceState() | &#10003;
 onDestroy()           |onDestroy()           |onActivityDestroyed()         | -
 
 **ALL** listener methods can optionally have the bound Activity instance as the method argument.

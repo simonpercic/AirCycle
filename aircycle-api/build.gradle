@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.7.1'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_7
@@ -8,3 +10,5 @@ targetCompatibility = JavaVersion.VERSION_1_7
 dependencies {
     compileOnly "com.google.android:android:$androidVersion"
 }
+
+apply from: '../gradle-publish/java/jcenterupload.gradle'

@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
@@ -20,3 +30,5 @@ android {
 dependencies {
     compile project(':aircycle-api')
 }
+
+apply from: '../gradle-publish/android/jcenterupload.gradle'

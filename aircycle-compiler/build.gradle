@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'idea'
     id 'net.ltgt.apt' version '0.8'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.7.1'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_7
@@ -23,3 +25,5 @@ dependencies {
     testCompile 'com.google.testing.compile:compile-testing:0.9'
     testCompile files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 }
+
+apply from: '../gradle-publish/java/jcenterupload.gradle'

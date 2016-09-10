@@ -170,6 +170,13 @@ These are automatically unregistered for the Activity once onDestroy is called.
 The listener callbacks are invoked only if the listener instance is not null and are dispatched only to their respective bound listener instances.
 
 
+## ProTip
+Annotate your Dagger injected presenters to automatically bind them to the Activity lifecycle, i.e.
+```java
+@AirCycle @Inject MyPresenter presenter;
+```
+
+
 ## Reflection-less
 AirCycle uses compile time annotation processing to generate Activity binding classes, NO reflection is used at runtime.
 

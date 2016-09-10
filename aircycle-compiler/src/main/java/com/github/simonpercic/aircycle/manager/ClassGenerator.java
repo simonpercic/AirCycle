@@ -44,6 +44,10 @@ public class ClassGenerator {
             + "\n"
             + "@author Simon Percic <a href=\"https://github.com/simonpercic\">https://github.com/simonpercic</a>\n";
 
+    private static final String BIND_JAVADOC = "Bind Activity's lifecycle callbacks to all of its AirCycles.\n"
+            + "\n"
+            + "@param $N the activity instance to bind\n";
+
     private final Elements elementUtils;
     private final Types typeUtils;
 
@@ -92,6 +96,7 @@ public class ClassGenerator {
                 .addModifiers(Modifier.STATIC)
                 .addParameter(enclosingActivityClass, ACTIVITY_PARAM)
                 .addStatement("new $L(" + ACTIVITY_PARAM + ").registerCallbacks()", className)
+                .addJavadoc(BIND_JAVADOC, ACTIVITY_PARAM)
                 .build();
 
         builder.addMethod(bind);

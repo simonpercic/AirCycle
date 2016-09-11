@@ -99,7 +99,11 @@ onDestroy()           |onDestroy()           |onActivityDestroyed()         | -
 
 **ALL** listener methods can optionally have the bound Activity instance as the method argument.
 Unlike method names, argument names do NOT matter.
- 
+
+
+#### Listener callbacks
+Listener callbacks are invoked on Android's **main thread**. Callbacks are invoked AFTER the respective method returns. 
+
 
 ### Built-in listeners
 The following listener interfaces are bundled with the library: 

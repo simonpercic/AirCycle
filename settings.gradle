@@ -1,1 +1,3 @@
 include ':aircycle-api', ':aircycle-lib', ':aircycle-compiler', ':example'
+findProject(':aircycle-lib')?.name = 'aircycle'
+

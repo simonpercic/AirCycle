@@ -2,6 +2,8 @@
 
 Binds Android Activity lifecycle callbacks to Activity fields annotated with `@AirCycle`. 
 
+[![CircleCI](https://circleci.com/gh/simonpercic/AirCycle.svg?style=shield&circle-token=1577d7f1180e6fae96a2ec83b8c7302111bdca9e)](https://circleci.com/gh/simonpercic/AirCycle)
+
 Fields annotated with `@AirCycle` that are defined in an Activity will receive lifecycle callbacks of the enclosing Activity. 
 The Activity does NOT need to implement any interface or extend any specific base class.
 

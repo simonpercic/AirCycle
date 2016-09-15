@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MVP Example</string>
+
+    <string name="countdown">Countdown</string>
+    <string name="start_countdown">Start countdown</string>
+    <string name="countdown_state_start">START</string>
+    <string name="countdown_state_complete">DONE</string>
+    <string name="close">Close</string>
+</resources>

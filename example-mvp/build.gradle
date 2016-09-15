@@ -5,19 +5,21 @@ buildscript {
 
     dependencies {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'si.dlabs.soter'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId 'com.github.simonpercic.example.aircycle'
+        applicationId 'com.github.simonpercic.mvp.example.aircycle'
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
@@ -47,8 +49,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     packagingOptions {
@@ -60,18 +62,26 @@ android {
 }
 
 ext.butterknifeVersion = '8.2.1'
+ext.daggerVersion = '2.7'
 ext.leakCanaryVersion = '1.4'
 
 dependencies {
     compile project(':aircycle')
 
     compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "com.android.support:design:$supportVersion"
     compile 'com.jakewharton.timber:timber:4.2.0'
     compile "com.jakewharton:butterknife:$butterknifeVersion"
+    compile "com.google.dagger:dagger:$daggerVersion"
+    compile 'io.reactivex:rxjava:1.1.10'
+    compile 'io.reactivex:rxandroid:1.2.1'
     compile project(':aircycle-api')
 
     apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
     apt project(':aircycle-compiler')
+
+    provided 'javax.annotation:javax.annotation-api:1.2'
 
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"

@@ -50,6 +50,14 @@
             android:name=".activity.a7.CustomListenerActivity"
             android:label="@string/custom_listener_activity" />
 
+        <activity
+            android:name=".activity.a8.BindConfigActivity"
+            android:label="@string/bind_config_activity" />
+
+        <activity
+            android:name=".activity.a9.DefaultConfigActivity"
+            android:label="@string/default_config_activity" />
+
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@ import com.github.simonpercic.example.aircycle.activity.a4.LifecycleCallbacksAct
 import com.github.simonpercic.example.aircycle.activity.a5.NullListenerActivity;
 import com.github.simonpercic.example.aircycle.activity.a6.MultipleListenersActivity;
 import com.github.simonpercic.example.aircycle.activity.a7.CustomListenerActivity;
+import com.github.simonpercic.example.aircycle.activity.a8.BindConfigActivity;
+import com.github.simonpercic.example.aircycle.activity.a9.DefaultConfigActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -55,5 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_open_custom_listener) void onBtnOpenCustomListenerClicked() {
         startActivity(CustomListenerActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.btn_open_bind_config) void onBtnOpenBindConfigClicked() {
+        startActivity(BindConfigActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.btn_open_default_config) void onBtnOpenDefaultConfigClicked() {
+        startActivity(DefaultConfigActivity.getIntent(this));
     }
 }

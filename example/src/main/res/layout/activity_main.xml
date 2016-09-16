@@ -47,4 +47,14 @@
         style="@style/Button"
         android:text="@string/custom_listener_activity" />
 
+    <Button
+        android:id="@+id/btn_open_bind_config"
+        style="@style/Button"
+        android:text="@string/bind_config_activity" />
+
+    <Button
+        android:id="@+id/btn_open_default_config"
+        style="@style/Button"
+        android:text="@string/default_config_activity" />
+
 </LinearLayout>

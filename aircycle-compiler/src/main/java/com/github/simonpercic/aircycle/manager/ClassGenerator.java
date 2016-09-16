@@ -1,6 +1,7 @@
 package com.github.simonpercic.aircycle.manager;
 
 import com.github.simonpercic.aircycle.AirCycle;
+import com.github.simonpercic.aircycle.AirCycleConfig;
 import com.github.simonpercic.aircycle.BaseAirCycle;
 import com.github.simonpercic.aircycle.model.FieldListenerMethods;
 import com.github.simonpercic.aircycle.model.ListenerMethod;
@@ -10,6 +11,7 @@ import com.github.simonpercic.collectionhelper.CollectionHelper;
 import com.github.simonpercic.collectionhelper.Predicate;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.MethodSpec.Builder;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
 
@@ -38,6 +40,8 @@ public class ClassGenerator {
     private static final String CLASS_SUFFIX = AirCycle.class.getSimpleName();
     private static final String ACTIVITY_PARAM = "activity";
     private static final String BUNDLE_PARAM = "bundle";
+    private static final String CONFIG_PARAM = "config";
+    private static final String REGISTER_CALLBACKS_METHOD = ".registerCallbacks()";
 
     private static final String CLASS_COMMENT = "Generated class from AirCycle, do not modify.\n"
             + "See: https://github.com/simonpercic/AirCycle\n"
@@ -47,6 +51,9 @@ public class ClassGenerator {
     private static final String BIND_JAVADOC = "Bind Activity's lifecycle callbacks to all of its AirCycles.\n"
             + "\n"
             + "@param $N the activity instance to bind\n";
+
+    private static final String BIND_CONFIG_JAVADOC = BIND_JAVADOC
+            + "@param $N the optional AirCycle config\n";
 
     private final Elements elementUtils;
     private final Types typeUtils;
@@ -81,7 +88,8 @@ public class ClassGenerator {
         MethodSpec constructor = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PROTECTED)
                 .addParameter(enclosingActivityClass, ACTIVITY_PARAM)
-                .addStatement("super($N)", ACTIVITY_PARAM)
+                .addParameter(ClassName.get(AirCycleConfig.class), CONFIG_PARAM)
+                .addStatement("super($N, $N)", ACTIVITY_PARAM, CONFIG_PARAM)
                 .build();
 
         builder.addMethod(constructor);
@@ -92,16 +100,28 @@ public class ClassGenerator {
             builder.addMethod(lifecycleMethod);
         }
 
-        MethodSpec bind = MethodSpec.methodBuilder("bind")
-                .addModifiers(Modifier.STATIC)
-                .addParameter(enclosingActivityClass, ACTIVITY_PARAM)
-                .addStatement("new $L(" + ACTIVITY_PARAM + ").registerCallbacks()", className)
+        MethodSpec bind = bindMethodSpec(enclosingActivityClass)
+                .addStatement("new $L($N, null)" + REGISTER_CALLBACKS_METHOD, className, ACTIVITY_PARAM)
                 .addJavadoc(BIND_JAVADOC, ACTIVITY_PARAM)
                 .build();
 
         builder.addMethod(bind);
 
+        MethodSpec bindConfig = bindMethodSpec(enclosingActivityClass)
+                .addParameter(ClassName.get(AirCycleConfig.class), CONFIG_PARAM)
+                .addStatement("new $L($N, $N)" + REGISTER_CALLBACKS_METHOD, className, ACTIVITY_PARAM, CONFIG_PARAM)
+                .addJavadoc(BIND_CONFIG_JAVADOC, ACTIVITY_PARAM, CONFIG_PARAM)
+                .build();
+
+        builder.addMethod(bindConfig);
+
         return builder.build();
+    }
+
+    private static Builder bindMethodSpec(ClassName enclosingActivityClass) {
+        return MethodSpec.methodBuilder("bind")
+                .addModifiers(Modifier.STATIC)
+                .addParameter(enclosingActivityClass, ACTIVITY_PARAM);
     }
 
     private MethodSpec createLifecycleMethod(

@@ -2,6 +2,7 @@ package com.github.simonpercic.aircycle;
 
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +18,7 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
 
     private final T tActivity;
     private final Handler handler;
+    private final AirCycleConfig config;
 
     // region Lifecycle runnables
 
@@ -53,8 +55,9 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
 
     // endregion Lifecycle runnables
 
-    protected BaseAirCycle(T tActivity) {
+    protected BaseAirCycle(T tActivity, AirCycleConfig config) {
         this.tActivity = tActivity;
+        this.config = config;
         this.handler = new Handler(Looper.getMainLooper());
     }
 
@@ -67,7 +70,17 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
 
         handler.post(new Runnable() {
             @Override public void run() {
-                notifyOnActivityCreated(tActivity, savedInstanceState);
+                Bundle bundle = savedInstanceState;
+
+                AirCycleConfig config = getConfig();
+                if (config != null && config.passIntentBundleOnCreate() && bundle == null) {
+                    Intent intent = tActivity.getIntent();
+                    if (intent != null) {
+                        bundle = intent.getExtras();
+                    }
+                }
+
+                notifyOnActivityCreated(tActivity, bundle);
             }
         });
     }
@@ -161,6 +174,14 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
     @SuppressWarnings(UNUSED_PARAMETERS)
     protected void notifyOnActivityDestroyed(T activity) {
 
+    }
+
+    private AirCycleConfig getConfig() {
+        if (config != null) {
+            return config;
+        } else {
+            return AirCycleDefaultConfig.getConfig();
+        }
     }
 
     protected void registerCallbacks() {

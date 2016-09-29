@@ -228,8 +228,8 @@ buildscript {
 apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
-    compile 'com.github.simonpercic:aircycle:1.0.0'
-    apt 'com.github.simonpercic:aircycle-compiler:1.0.0'
+    compile 'com.github.simonpercic:aircycle:1.1.0'
+    apt 'com.github.simonpercic:aircycle-compiler:1.1.0'
 }
 ```
 

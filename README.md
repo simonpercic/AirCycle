@@ -190,7 +190,7 @@ AirCycleDefaultConfig.setConfig(airCycleConfig);
 ```
 
 ### Configuration options
-- `passIntentBundleOnCreate(true)` if true, it passes the Activity's starting Intent Extras Bundle only if its savedInstanceState is null in onCreate(), i.e. getIntent().getExtras() with null-checks.
+- `passIntentBundleOnCreate(true|false)` if true, it passes the Activity's starting Intent Extras Bundle only if its savedInstanceState is null in onCreate(), i.e. getIntent().getExtras() with null-checks. If false, it always passes the savedInstanceState. Defaults to `false`. 
 
 
 ## How does it work?

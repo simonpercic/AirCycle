@@ -178,13 +178,13 @@ AirCycleConfig airCycleConfig = AirCycleConfig.builder()
 ```
 
 #### Apply when binding
-You can pass it to the generated &lt;YourActivity&gt;AirCycle `bind` method when binding and it will only apply to that instance of the Activity.
+You can pass an instance of `AirCycleConfig` to the generated &lt;YourActivity&gt;AirCycle `bind` method when binding and it will only apply to that instance of the Activity.
 ```java
 MyActivityAirCycle.bind(this, airCycleConfig);
 ```
 
 #### Apply as a default config
-Alternatively, you can set it as the app-wide default config and it will be applied to all the AirCycles that don't have another config applied while binding.
+Alternatively, you can set an `AirCycleConfig` as the app-wide default config and it will be applied to all the AirCycles that don't have another config applied when binding.
 ```java
 AirCycleDefaultConfig.setConfig(airCycleConfig);
 ```

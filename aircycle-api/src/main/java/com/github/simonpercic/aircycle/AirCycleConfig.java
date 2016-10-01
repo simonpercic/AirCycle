@@ -1,5 +1,8 @@
 package com.github.simonpercic.aircycle;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * AirCycleConfig, used to set configuration values for binding via AirCycle.
  *
@@ -8,13 +11,21 @@ package com.github.simonpercic.aircycle;
 public final class AirCycleConfig {
 
     private final boolean passIntentBundleOnCreate;
+    private final Set<Integer> ignoredLifecycleCallbacks;
 
-    private AirCycleConfig(boolean passIntentBundleOnCreate) {
+    private AirCycleConfig(boolean passIntentBundleOnCreate, Set<Integer> ignoredLifecycleCallbacks) {
         this.passIntentBundleOnCreate = passIntentBundleOnCreate;
+        this.ignoredLifecycleCallbacks = ignoredLifecycleCallbacks;
     }
 
     boolean passIntentBundleOnCreate() {
         return passIntentBundleOnCreate;
+    }
+
+    boolean ignoreLifecycleCallback(int lifecycle) {
+        return ignoredLifecycleCallbacks != null
+                && ignoredLifecycleCallbacks.size() > 0
+                && ignoredLifecycleCallbacks.contains(lifecycle);
     }
 
     /**
@@ -32,6 +43,7 @@ public final class AirCycleConfig {
     public static final class Builder {
 
         private boolean passIntentBundleOnCreate;
+        private Set<Integer> ignoredLifecycleCallbacks;
 
         private Builder() {
 
@@ -50,12 +62,38 @@ public final class AirCycleConfig {
         }
 
         /**
+         * Disable passing of an Activity lifecycle callback from {@link ActivityLifecycle}'s constants.
+         *
+         * @param lifecycleCallback lifecycle callback to ignore
+         * @return this Builder, for chaining calls
+         */
+        public Builder ignoreLifecycleCallback(int lifecycleCallback) {
+            switch (lifecycleCallback) {
+                case ActivityLifecycle.CREATE:
+                case ActivityLifecycle.START:
+                case ActivityLifecycle.RESUME:
+                case ActivityLifecycle.PAUSE:
+                case ActivityLifecycle.STOP:
+                case ActivityLifecycle.SAVE_INSTANCE_STATE:
+                case ActivityLifecycle.DESTROY:
+                    if (ignoredLifecycleCallbacks == null) {
+                        ignoredLifecycleCallbacks = new HashSet<>();
+                    }
+
+                    ignoredLifecycleCallbacks.add(lifecycleCallback);
+                    return this;
+                default:
+                    throw new IllegalArgumentException("unknown lifecycle type");
+            }
+        }
+
+        /**
          * Build the AirCycleConfig.
          *
          * @return built AirCycleConfig
          */
         public AirCycleConfig build() {
-            return new AirCycleConfig(passIntentBundleOnCreate);
+            return new AirCycleConfig(passIntentBundleOnCreate, ignoredLifecycleCallbacks);
         }
     }
 }

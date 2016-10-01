@@ -68,11 +68,15 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
+        final AirCycleConfig config = getConfig();
+        if (config != null && config.ignoreLifecycleCallback(ActivityLifecycle.CREATE)) {
+            return;
+        }
+
         handler.post(new Runnable() {
             @Override public void run() {
                 Bundle bundle = savedInstanceState;
 
-                AirCycleConfig config = getConfig();
                 if (config != null && config.passIntentBundleOnCreate() && bundle == null) {
                     Intent intent = tActivity.getIntent();
                     if (intent != null) {
@@ -90,11 +94,19 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
+        if (ignoreLifecycleCallback(ActivityLifecycle.START)) {
+            return;
+        }
+
         handler.post(onActivityStartedRunnable);
     }
 
     @Override public void onActivityResumed(Activity activity) {
         if (activity != tActivity) {
+            return;
+        }
+
+        if (ignoreLifecycleCallback(ActivityLifecycle.RESUME)) {
             return;
         }
 
@@ -106,6 +118,10 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
+        if (ignoreLifecycleCallback(ActivityLifecycle.PAUSE)) {
+            return;
+        }
+
         handler.post(onActivityPausedRunnable);
     }
 
@@ -114,11 +130,19 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
             return;
         }
 
+        if (ignoreLifecycleCallback(ActivityLifecycle.STOP)) {
+            return;
+        }
+
         handler.post(onActivityStoppedRunnable);
     }
 
     @Override public void onActivitySaveInstanceState(Activity activity, final Bundle outState) {
         if (activity != tActivity) {
+            return;
+        }
+
+        if (ignoreLifecycleCallback(ActivityLifecycle.SAVE_INSTANCE_STATE)) {
             return;
         }
 
@@ -135,6 +159,10 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         }
 
         tActivity.getApplication().unregisterActivityLifecycleCallbacks(this);
+
+        if (ignoreLifecycleCallback(ActivityLifecycle.DESTROY)) {
+            return;
+        }
 
         handler.post(onActivityDestroyedRunnable);
     }
@@ -182,6 +210,11 @@ public abstract class BaseAirCycle<T extends Activity> implements ActivityLifecy
         } else {
             return AirCycleDefaultConfig.getConfig();
         }
+    }
+
+    private boolean ignoreLifecycleCallback(int lifecycle) {
+        AirCycleConfig config = getConfig();
+        return config != null && config.ignoreLifecycleCallback(lifecycle);
     }
 
     protected void registerCallbacks() {

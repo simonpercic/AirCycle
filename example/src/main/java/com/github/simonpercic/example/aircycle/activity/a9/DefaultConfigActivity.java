@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.github.simonpercic.aircycle.ActivityLifecycle;
 import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.aircycle.AirCycleConfig;
 import com.github.simonpercic.aircycle.AirCycleDefaultConfig;
@@ -24,6 +25,8 @@ public class DefaultConfigActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         AirCycleConfig airCycleConfig = AirCycleConfig.builder()
                 .passIntentBundleOnCreate(true)
+                .ignoreLifecycleCallback(ActivityLifecycle.START)
+                .ignoreLifecycleCallback(ActivityLifecycle.STOP)
                 .build();
 
         AirCycleDefaultConfig.setConfig(airCycleConfig);

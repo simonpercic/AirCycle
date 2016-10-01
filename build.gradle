@@ -33,6 +33,6 @@ subprojects {
         buildToolsVersion = '24.0.2'
         minSdkVersion = 14
         targetSdkVersion = 24
-        supportVersion = '24.2.0'
+        supportVersion = '24.2.1'
     }
 }

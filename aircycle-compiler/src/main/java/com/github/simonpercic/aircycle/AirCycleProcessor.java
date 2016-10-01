@@ -13,8 +13,8 @@ import com.google.auto.service.AutoService;
 import com.squareup.javapoet.TypeSpec;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +27,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.inject.Inject;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
@@ -56,7 +57,10 @@ public class AirCycleProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(AirCycle.class.getCanonicalName());
+        Set<String> annotations = new HashSet<>();
+        annotations.add(AirCycle.class.getCanonicalName());
+        annotations.add(Ignore.class.getCanonicalName());
+        return annotations;
     }
 
     @Override
@@ -85,6 +89,21 @@ public class AirCycleProcessor extends AbstractProcessor {
             fields.add(field);
         }
 
+        Map<TypeElement, List<ExecutableElement>> ignoredMethods = new HashMap<>();
+
+        for (Element ignoredElement : roundEnv.getElementsAnnotatedWith(Ignore.class)) {
+            ExecutableElement method = (ExecutableElement) ignoredElement;
+            TypeElement enclosingElement = (TypeElement) method.getEnclosingElement();
+
+            List<ExecutableElement> methods = ignoredMethods.get(enclosingElement);
+            if (methods == null) {
+                methods = new ArrayList<>();
+                ignoredMethods.put(enclosingElement, methods);
+            }
+
+            methods.add(method);
+        }
+
         for (TypeElement enclosingElement : enclosingElements.keySet()) {
             Map<ActivityLifecycle, List<FieldListenerMethods>> lifecycleListenerMethods = new TreeMap<>();
 
@@ -93,7 +112,11 @@ public class AirCycleProcessor extends AbstractProcessor {
                 DeclaredType declaredType = (DeclaredType) field.asType();
                 TypeElement element = (TypeElement) declaredType.asElement();
 
-                Map<ActivityLifecycle, List<ListenerMethod>> methods = methodParser.parseLifecycleMethods(element);
+                List<ExecutableElement> typeIgnoredMethods = ignoredMethods.get(element);
+
+                Map<ActivityLifecycle, List<ListenerMethod>> methods =
+                        methodParser.parseLifecycleMethods(element, typeIgnoredMethods);
+
                 if (methods == null) {
                     return true;
                 }

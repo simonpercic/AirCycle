@@ -44,7 +44,9 @@ public class MethodParser {
         this.typeUtils = typeUtils;
     }
 
-    public Map<ActivityLifecycle, List<ListenerMethod>> parseLifecycleMethods(TypeElement element) {
+    public Map<ActivityLifecycle, List<ListenerMethod>> parseLifecycleMethods(TypeElement element,
+            List<ExecutableElement> ignoredMethods) {
+
         Map<ActivityLifecycle, List<ListenerMethod>> lifecycleMethods = new TreeMap<>();
 
         List<? extends Element> allMembers = elementUtils.getAllMembers(element);
@@ -52,6 +54,14 @@ public class MethodParser {
 
         for (ExecutableElement method : allMethods) {
             if (!isLifecycleMethod(method)) {
+                continue;
+            }
+
+            if (ignoredMethods != null && ignoredMethods.contains(method)) {
+                String message = String.format("Skipping method `%s` in `%s`",
+                        method.getSimpleName(), element.getQualifiedName());
+
+                logger.n(message, method);
                 continue;
             }
 

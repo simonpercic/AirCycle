@@ -94,11 +94,6 @@ public class IgnoreMethodsTest {
                 .that(ImmutableList.of(input, listener))
                 .processedWith(new AirCycleProcessor())
                 .compilesWithoutWarnings()
-                .withNoteContaining("Skipping method `onStart` in `listener.CustomListener`")
-                .and()
-                .withNoteContaining("Skipping method `onResume` in `listener.CustomListener`")
-                .and()
-                .withNoteCount(2)
                 .and()
                 .generatesSources(expected);
     }

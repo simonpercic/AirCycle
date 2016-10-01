@@ -20,10 +20,6 @@ public class ProcessorLogger {
         this.messager = messager;
     }
 
-    public void n(CharSequence message, Element element) {
-        messager.printMessage(Kind.NOTE, message, element);
-    }
-
     public void w(CharSequence message, Element element) {
         messager.printMessage(Kind.WARNING, message, element);
     }

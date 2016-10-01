@@ -58,10 +58,6 @@ public class MethodParser {
             }
 
             if (ignoredMethods != null && ignoredMethods.contains(method)) {
-                String message = String.format("Skipping method `%s` in `%s`",
-                        method.getSimpleName(), element.getQualifiedName());
-
-                logger.n(message, method);
                 continue;
             }
 

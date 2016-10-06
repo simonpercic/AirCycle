@@ -1,5 +1,7 @@
 package com.github.simonpercic.aircycle;
 
+import android.support.annotation.Nullable;
+
 /**
  * AirCycleDefaultConfig, use it to set app-wide configuration defaults.
  *
@@ -7,7 +9,7 @@ package com.github.simonpercic.aircycle;
  */
 public final class AirCycleDefaultConfig {
 
-    private static AirCycleConfig defaultConfig;
+    @Nullable private static AirCycleConfig defaultConfig;
 
     private AirCycleDefaultConfig() {
         // no instance
@@ -18,11 +20,11 @@ public final class AirCycleDefaultConfig {
      *
      * @param defaultConfig AirCycleConfig used as the default
      */
-    public static void setConfig(AirCycleConfig defaultConfig) {
+    public static void setConfig(@Nullable AirCycleConfig defaultConfig) {
         AirCycleDefaultConfig.defaultConfig = defaultConfig;
     }
 
-    static AirCycleConfig getConfig() {
+    @Nullable static AirCycleConfig getConfig() {
         return defaultConfig;
     }
 }

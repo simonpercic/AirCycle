@@ -1,5 +1,7 @@
 package com.github.simonpercic.aircycle;
 
+import android.support.annotation.Nullable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,9 +13,9 @@ import java.util.Set;
 public final class AirCycleConfig {
 
     private final boolean passIntentBundleOnCreate;
-    private final Set<Integer> ignoredLifecycleCallbacks;
+    @Nullable private final Set<Integer> ignoredLifecycleCallbacks;
 
-    private AirCycleConfig(boolean passIntentBundleOnCreate, Set<Integer> ignoredLifecycleCallbacks) {
+    private AirCycleConfig(boolean passIntentBundleOnCreate, @Nullable Set<Integer> ignoredLifecycleCallbacks) {
         this.passIntentBundleOnCreate = passIntentBundleOnCreate;
         this.ignoredLifecycleCallbacks = ignoredLifecycleCallbacks;
     }
@@ -43,7 +45,7 @@ public final class AirCycleConfig {
     public static final class Builder {
 
         private boolean passIntentBundleOnCreate;
-        private Set<Integer> ignoredLifecycleCallbacks;
+        @Nullable private Set<Integer> ignoredLifecycleCallbacks;
 
         private Builder() {
 

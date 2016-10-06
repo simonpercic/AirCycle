@@ -53,5 +53,5 @@ public @interface AirCycle {
      *
      * @return array of ints representing lifecycle callback values to ignore when generating binding code.
      */
-    int[] ignore() default {};
+    @ActivityLifecycle.ActivityLifecycleEvent int[] ignore() default {};
 }

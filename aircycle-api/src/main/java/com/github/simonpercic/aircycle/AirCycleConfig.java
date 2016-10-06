@@ -69,7 +69,7 @@ public final class AirCycleConfig {
          * @param lifecycleCallback lifecycle callback to ignore
          * @return this Builder, for chaining calls
          */
-        public Builder ignoreLifecycleCallback(int lifecycleCallback) {
+        public Builder ignoreLifecycleCallback(@ActivityLifecycle.ActivityLifecycleEvent int lifecycleCallback) {
             switch (lifecycleCallback) {
                 case ActivityLifecycle.CREATE:
                 case ActivityLifecycle.START:

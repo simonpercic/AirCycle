@@ -2,13 +2,14 @@ package com.github.simonpercic.aircycle;
 
 import com.github.simonpercic.aircycle.dagger.DaggerProcessorComponent;
 import com.github.simonpercic.aircycle.dagger.ProcessorModule;
+import com.github.simonpercic.aircycle.manager.ActivityLifecycleConverter;
 import com.github.simonpercic.aircycle.manager.ClassFileWriter;
 import com.github.simonpercic.aircycle.manager.ClassGenerator;
 import com.github.simonpercic.aircycle.manager.FieldValidator;
 import com.github.simonpercic.aircycle.manager.MethodParser;
 import com.github.simonpercic.aircycle.model.FieldListenerMethods;
 import com.github.simonpercic.aircycle.model.ListenerMethod;
-import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
+import com.github.simonpercic.aircycle.model.type.ActivityLifecycleType;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.TypeSpec;
 
@@ -42,6 +43,7 @@ public class AirCycleProcessor extends AbstractProcessor {
 
     @Inject FieldValidator fieldValidator;
     @Inject MethodParser methodParser;
+    @Inject ActivityLifecycleConverter activityLifecycleConverter;
     @Inject ClassGenerator classGenerator;
     @Inject ClassFileWriter classFileWriter;
 
@@ -105,7 +107,7 @@ public class AirCycleProcessor extends AbstractProcessor {
         }
 
         for (TypeElement enclosingElement : enclosingElements.keySet()) {
-            Map<ActivityLifecycle, List<FieldListenerMethods>> lifecycleListenerMethods = new TreeMap<>();
+            Map<ActivityLifecycleType, List<FieldListenerMethods>> lifecycleListenerMethods = new TreeMap<>();
 
             List<VariableElement> fields = enclosingElements.get(enclosingElement);
             for (VariableElement field : fields) {
@@ -114,14 +116,19 @@ public class AirCycleProcessor extends AbstractProcessor {
 
                 List<ExecutableElement> typeIgnoredMethods = ignoredMethods.get(element);
 
-                Map<ActivityLifecycle, List<ListenerMethod>> methods =
-                        methodParser.parseLifecycleMethods(element, typeIgnoredMethods);
+                int[] ignoreLifecycleInts = field.getAnnotation(AirCycle.class).ignore();
+
+                List<ActivityLifecycleType> ignoreLifecycleTypes = activityLifecycleConverter.fromInts(
+                        ignoreLifecycleInts, field, enclosingElement);
+
+                Map<ActivityLifecycleType, List<ListenerMethod>> methods =
+                        methodParser.parseLifecycleMethods(element, typeIgnoredMethods, ignoreLifecycleTypes);
 
                 if (methods == null) {
                     return true;
                 }
 
-                for (ActivityLifecycle lifecycle : methods.keySet()) {
+                for (ActivityLifecycleType lifecycle : methods.keySet()) {
                     List<FieldListenerMethods> fieldListenerMethods = lifecycleListenerMethods.get(lifecycle);
                     if (fieldListenerMethods == null) {
                         fieldListenerMethods = new ArrayList<>();

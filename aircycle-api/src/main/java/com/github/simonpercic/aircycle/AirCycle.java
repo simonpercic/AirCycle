@@ -38,4 +38,20 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(value = ElementType.FIELD)
 public @interface AirCycle {
+
+    /**
+     * Ignore Activity lifecycle callbacks when generating binding code.
+     * <p>
+     * Valid values are:
+     * ActivityLifecycle.CREATE (1),
+     * ActivityLifecycle.START (2),
+     * ActivityLifecycle.RESUME (3),
+     * ActivityLifecycle.PAUSE (4),
+     * ActivityLifecycle.STOP (5),
+     * ActivityLifecycle.SAVE_INSTANCE_STATE (6) or
+     * ActivityLifecycle.DESTROY (7).
+     *
+     * @return array of ints representing lifecycle callback values to ignore when generating binding code.
+     */
+    int[] ignore() default {};
 }

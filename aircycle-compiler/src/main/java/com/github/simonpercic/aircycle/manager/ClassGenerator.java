@@ -5,8 +5,8 @@ import com.github.simonpercic.aircycle.AirCycleConfig;
 import com.github.simonpercic.aircycle.BaseAirCycle;
 import com.github.simonpercic.aircycle.model.FieldListenerMethods;
 import com.github.simonpercic.aircycle.model.ListenerMethod;
-import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
-import com.github.simonpercic.aircycle.model.type.ListenerArg;
+import com.github.simonpercic.aircycle.model.type.ActivityLifecycleType;
+import com.github.simonpercic.aircycle.model.type.ListenerArgType;
 import com.github.simonpercic.collectionhelper.CollectionHelper;
 import com.github.simonpercic.collectionhelper.Predicate;
 import com.squareup.javapoet.ClassName;
@@ -65,7 +65,7 @@ public class ClassGenerator {
     }
 
     public TypeSpec generateClass(TypeElement enclosingElement,
-            Map<ActivityLifecycle, List<FieldListenerMethods>> methods) {
+            Map<ActivityLifecycleType, List<FieldListenerMethods>> methods) {
         if (enclosingElement == null) {
             throw new IllegalArgumentException("enclosingElement is null");
         }
@@ -94,7 +94,7 @@ public class ClassGenerator {
 
         builder.addMethod(constructor);
 
-        for (ActivityLifecycle lifecycle : methods.keySet()) {
+        for (ActivityLifecycleType lifecycle : methods.keySet()) {
             List<FieldListenerMethods> fieldListenerMethods = methods.get(lifecycle);
             MethodSpec lifecycleMethod = createLifecycleMethod(lifecycle, fieldListenerMethods, enclosingElement);
             builder.addMethod(lifecycleMethod);
@@ -125,7 +125,7 @@ public class ClassGenerator {
     }
 
     private MethodSpec createLifecycleMethod(
-            final ActivityLifecycle lifecycle,
+            final ActivityLifecycleType lifecycle,
             List<FieldListenerMethods> fieldListenerMethods,
             TypeElement enclosingElement) {
 
@@ -169,13 +169,13 @@ public class ClassGenerator {
         return methodBuilder.build();
     }
 
-    private static String paramsCall(List<ListenerArg> methodArgs) {
+    private static String paramsCall(List<ListenerArgType> methodArgs) {
         StringBuilder sb = new StringBuilder();
         sb.append('(');
 
         if (!CollectionHelper.isEmpty(methodArgs)) {
             for (int i = 0; i < methodArgs.size(); i++) {
-                ListenerArg arg = methodArgs.get(i);
+                ListenerArgType arg = methodArgs.get(i);
 
                 if (i > 0) {
                     sb.append(", ");
@@ -190,7 +190,7 @@ public class ClassGenerator {
         return sb.toString();
     }
 
-    private static String argNameForListenerArg(ListenerArg arg) {
+    private static String argNameForListenerArg(ListenerArgType arg) {
         switch (arg) {
             case BUNDLE:
                 return BUNDLE_PARAM;
@@ -201,7 +201,7 @@ public class ClassGenerator {
         }
     }
 
-    private static String getBaseAirCycleNotifyMethodName(ActivityLifecycle lifecycleType) {
+    private static String getBaseAirCycleNotifyMethodName(ActivityLifecycleType lifecycleType) {
         switch (lifecycleType) {
             case CREATE:
                 return "notifyOnActivityCreated";

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.github.simonpercic.aircycle.exception.MethodArgumentsException;
 import com.github.simonpercic.aircycle.model.ListenerMethod;
-import com.github.simonpercic.aircycle.model.type.ActivityLifecycle;
+import com.github.simonpercic.aircycle.model.type.ActivityLifecycleType;
 import com.github.simonpercic.aircycle.utils.ElementValidator;
 import com.github.simonpercic.collectionhelper.CollectionHelper;
 
@@ -44,10 +44,10 @@ public class MethodParser {
         this.typeUtils = typeUtils;
     }
 
-    public Map<ActivityLifecycle, List<ListenerMethod>> parseLifecycleMethods(TypeElement element,
-            List<ExecutableElement> ignoredMethods) {
+    public Map<ActivityLifecycleType, List<ListenerMethod>> parseLifecycleMethods(TypeElement element,
+            List<ExecutableElement> ignoredMethods, List<ActivityLifecycleType> ignoreLifecycleCallbacks) {
 
-        Map<ActivityLifecycle, List<ListenerMethod>> lifecycleMethods = new TreeMap<>();
+        Map<ActivityLifecycleType, List<ListenerMethod>> lifecycleMethods = new TreeMap<>();
 
         List<? extends Element> allMembers = elementUtils.getAllMembers(element);
         List<ExecutableElement> allMethods = ElementFilter.methodsIn(allMembers);
@@ -59,6 +59,15 @@ public class MethodParser {
 
             if (ignoredMethods != null && ignoredMethods.contains(method)) {
                 continue;
+            }
+
+            if (!CollectionHelper.isEmpty(ignoreLifecycleCallbacks)) {
+                String methodName = method.getSimpleName().toString();
+                ActivityLifecycleType activityLifecycle = parseLifecycle(methodName);
+
+                if (ignoreLifecycleCallbacks.contains(activityLifecycle)) {
+                    continue;
+                }
             }
 
             LifecycleMethod lifecycleMethod = parseLifecycleMethod(method, element);
@@ -101,7 +110,7 @@ public class MethodParser {
         }
 
         String methodName = method.getSimpleName().toString();
-        ActivityLifecycle activityLifecycle = parseLifecycle(methodName);
+        ActivityLifecycleType activityLifecycle = parseLifecycle(methodName);
 
         if (activityLifecycle == null) {
             return null;
@@ -164,44 +173,44 @@ public class MethodParser {
             throw new IllegalArgumentException("method is null");
         }
 
-        ActivityLifecycle activityLifecycle = parseLifecycle(method.getSimpleName().toString());
+        ActivityLifecycleType activityLifecycle = parseLifecycle(method.getSimpleName().toString());
         return activityLifecycle != null;
     }
 
-    private static ActivityLifecycle parseLifecycle(String methodName) {
+    private static ActivityLifecycleType parseLifecycle(String methodName) {
         switch (methodName) {
             case "onCreate":
             case "onActivityCreated":
-                return ActivityLifecycle.CREATE;
+                return ActivityLifecycleType.CREATE;
             case "onStart":
             case "onActivityStarted":
-                return ActivityLifecycle.START;
+                return ActivityLifecycleType.START;
             case "onResume":
             case "onActivityResumed":
-                return ActivityLifecycle.RESUME;
+                return ActivityLifecycleType.RESUME;
             case "onPause":
             case "onActivityPaused":
-                return ActivityLifecycle.PAUSE;
+                return ActivityLifecycleType.PAUSE;
             case "onStop":
             case "onActivityStopped":
-                return ActivityLifecycle.STOP;
+                return ActivityLifecycleType.STOP;
             case "onSaveInstanceState":
             case "onActivitySaveInstanceState":
-                return ActivityLifecycle.SAVE_INSTANCE_STATE;
+                return ActivityLifecycleType.SAVE_INSTANCE_STATE;
             case "onDestroy":
             case "onActivityDestroyed":
-                return ActivityLifecycle.DESTROY;
+                return ActivityLifecycleType.DESTROY;
             default:
                 return null;
         }
     }
 
-    static class LifecycleMethod {
+    private static class LifecycleMethod {
 
-        final ActivityLifecycle lifecycleType;
+        final ActivityLifecycleType lifecycleType;
         final ListenerMethod listenerMethod;
 
-        LifecycleMethod(ActivityLifecycle lifecycleType, ListenerMethod listenerMethod) {
+        LifecycleMethod(ActivityLifecycleType lifecycleType, ListenerMethod listenerMethod) {
             this.lifecycleType = lifecycleType;
             this.listenerMethod = listenerMethod;
         }

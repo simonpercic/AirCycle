@@ -1,4 +1,4 @@
-package com.github.simonpercic.example.aircycle.activity.a1;
+package com.github.simonpercic.example.aircycle.activity.a06;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,20 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import com.github.simonpercic.aircycle.AirCycle;
 import com.github.simonpercic.example.aircycle.R;
 import com.github.simonpercic.example.aircycle.logger.ActivityAirCycleLogger;
+import com.github.simonpercic.example.aircycle.logger.ActivityBundleAirCycleLogger;
 
 /**
- * Example Activity showing usage of AirCycle's provided ActivityAirCycle listener.
- * In this example, the listener instance is created after bind at the end of onCreate()
+ * Example Activity showing usage of multiple listeners annotated with AirCycle in the same Activity.
  *
  * @author Simon Percic <a href="https://github.com/simonpercic">https://github.com/simonpercic</a>
  */
-public class ListenerActivity extends AppCompatActivity {
+public class MultipleListenersActivity extends AppCompatActivity {
 
     @AirCycle ActivityAirCycleLogger airCycleLogger;
+    @AirCycle final ActivityBundleAirCycleLogger bundleAirCycleLogger = new ActivityBundleAirCycleLogger();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ListenerActivityAirCycle.bind(this);
+        MultipleListenersActivityAirCycle.bind(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
@@ -29,6 +30,6 @@ public class ListenerActivity extends AppCompatActivity {
     }
 
     public static Intent getIntent(Context context) {
-        return new Intent(context, ListenerActivity.class);
+        return new Intent(context, MultipleListenersActivity.class);
     }
 }

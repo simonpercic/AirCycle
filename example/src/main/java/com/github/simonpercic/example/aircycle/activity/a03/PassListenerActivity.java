@@ -1,4 +1,4 @@
-package com.github.simonpercic.example.aircycle.activity.a3;
+package com.github.simonpercic.example.aircycle.activity.a03;
 
 import android.content.Context;
 import android.content.Intent;

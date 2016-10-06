@@ -23,39 +23,39 @@
         </activity>
 
         <activity
-            android:name=".activity.a1.ListenerActivity"
+            android:name=".activity.a01.ListenerActivity"
             android:label="@string/listener_activity" />
 
         <activity
-            android:name=".activity.a2.BundleListenerActivity"
+            android:name=".activity.a02.BundleListenerActivity"
             android:label="@string/bundle_listener_activity" />
 
         <activity
-            android:name=".activity.a3.PassListenerActivity"
+            android:name=".activity.a03.PassListenerActivity"
             android:label="@string/pass_listener_activity" />
 
         <activity
-            android:name=".activity.a4.LifecycleCallbacksActivity"
+            android:name=".activity.a04.LifecycleCallbacksActivity"
             android:label="@string/lifecycle_callbacks_activity" />
 
         <activity
-            android:name=".activity.a5.NullListenerActivity"
+            android:name=".activity.a05.NullListenerActivity"
             android:label="@string/null_listener_activity" />
 
         <activity
-            android:name=".activity.a6.MultipleListenersActivity"
+            android:name=".activity.a06.MultipleListenersActivity"
             android:label="@string/multiple_listeners_activity" />
 
         <activity
-            android:name=".activity.a7.CustomListenerActivity"
+            android:name=".activity.a07.CustomListenerActivity"
             android:label="@string/custom_listener_activity" />
 
         <activity
-            android:name=".activity.a8.BindConfigActivity"
+            android:name=".activity.a08.BindConfigActivity"
             android:label="@string/bind_config_activity" />
 
         <activity
-            android:name=".activity.a9.DefaultConfigActivity"
+            android:name=".activity.a09.DefaultConfigActivity"
             android:label="@string/default_config_activity" />
 
     </application>

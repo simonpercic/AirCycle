@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activity.MainActivity">
 
-    <Button
-        android:id="@+id/btn_open_listener"
-        style="@style/Button"
-        android:text="@string/listener_activity" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_open_bundle_listener"
-        style="@style/Button"
-        android:text="@string/bundle_listener_activity" />
+        <Button
+            android:id="@+id/btn_open_listener"
+            style="@style/Button"
+            android:text="@string/listener_activity" />
 
-    <Button
-        android:id="@+id/btn_open_pass_listener"
-        style="@style/Button"
-        android:text="@string/pass_listener_activity" />
+        <Button
+            android:id="@+id/btn_open_bundle_listener"
+            style="@style/Button"
+            android:text="@string/bundle_listener_activity" />
 
-    <Button
-        android:id="@+id/btn_open_lifecycle_callbacks"
-        style="@style/Button"
-        android:text="@string/lifecycle_callbacks_activity" />
+        <Button
+            android:id="@+id/btn_open_pass_listener"
+            style="@style/Button"
+            android:text="@string/pass_listener_activity" />
 
-    <Button
-        android:id="@+id/btn_open_null_listener"
-        style="@style/Button"
-        android:text="@string/null_listener_activity" />
+        <Button
+            android:id="@+id/btn_open_lifecycle_callbacks"
+            style="@style/Button"
+            android:text="@string/lifecycle_callbacks_activity" />
 
-    <Button
-        android:id="@+id/btn_open_multiple_listeners"
-        style="@style/Button"
-        android:text="@string/multiple_listeners_activity" />
+        <Button
+            android:id="@+id/btn_open_null_listener"
+            style="@style/Button"
+            android:text="@string/null_listener_activity" />
 
-    <Button
-        android:id="@+id/btn_open_custom_listener"
-        style="@style/Button"
-        android:text="@string/custom_listener_activity" />
+        <Button
+            android:id="@+id/btn_open_multiple_listeners"
+            style="@style/Button"
+            android:text="@string/multiple_listeners_activity" />
 
-    <Button
-        android:id="@+id/btn_open_bind_config"
-        style="@style/Button"
-        android:text="@string/bind_config_activity" />
+        <Button
+            android:id="@+id/btn_open_custom_listener"
+            style="@style/Button"
+            android:text="@string/custom_listener_activity" />
 
-    <Button
-        android:id="@+id/btn_open_default_config"
-        style="@style/Button"
-        android:text="@string/default_config_activity" />
+        <Button
+            android:id="@+id/btn_open_bind_config"
+            style="@style/Button"
+            android:text="@string/bind_config_activity" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_open_default_config"
+            style="@style/Button"
+            android:text="@string/default_config_activity" />
+
+        <Button
+            android:id="@+id/btn_open_ignore_annotation"
+            style="@style/Button"
+            android:text="@string/ignore_annotation_activity" />
+
+    </LinearLayout>
+</ScrollView>

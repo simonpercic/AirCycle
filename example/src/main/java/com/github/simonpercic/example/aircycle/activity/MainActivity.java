@@ -13,6 +13,7 @@ import com.github.simonpercic.example.aircycle.activity.a06.MultipleListenersAct
 import com.github.simonpercic.example.aircycle.activity.a07.CustomListenerActivity;
 import com.github.simonpercic.example.aircycle.activity.a08.BindConfigActivity;
 import com.github.simonpercic.example.aircycle.activity.a09.DefaultConfigActivity;
+import com.github.simonpercic.example.aircycle.activity.a10.IgnoreAnnotationActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -65,5 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_open_default_config) void onBtnOpenDefaultConfigClicked() {
         startActivity(DefaultConfigActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.btn_open_ignore_annotation) void onBtnOpenIgnoreAnnotationClicked() {
+        startActivity(IgnoreAnnotationActivity.getIntent(this));
     }
 }

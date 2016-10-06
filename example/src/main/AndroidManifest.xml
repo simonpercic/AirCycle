@@ -58,6 +58,10 @@
             android:name=".activity.a09.DefaultConfigActivity"
             android:label="@string/default_config_activity" />
 
+        <activity
+            android:name=".activity.a10.IgnoreAnnotationActivity"
+            android:label="@string/ignore_annotation_activity" />
+
     </application>
 
 </manifest>

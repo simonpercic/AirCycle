@@ -10,4 +10,5 @@
     <string name="custom_listener_activity">Custom Listener Activity</string>
     <string name="bind_config_activity">Bind Config Activity</string>
     <string name="default_config_activity">Default Config Activity</string>
+    <string name="ignore_annotation_activity">Ignore Annotation Activity</string>
 </resources>

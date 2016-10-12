@@ -4,6 +4,7 @@ Binds Android Activity lifecycle callbacks to Activity fields annotated with `@A
 
 [![CircleCI](https://circleci.com/gh/simonpercic/AirCycle.svg?style=shield&circle-token=1577d7f1180e6fae96a2ec83b8c7302111bdca9e)](https://circleci.com/gh/simonpercic/AirCycle)
 [ ![Download](https://api.bintray.com/packages/simonpercic/maven/aircycle/images/download.svg) ](https://bintray.com/simonpercic/maven/aircycle/_latestVersion)
+[![Method count](https://img.shields.io/badge/Methods count-core: 2 | deps: 76-e91e63.svg)](http://www.methodscount.com/?lib=com.github.simonpercic%3Aaircycle%3A1.1.0)
 
 Fields annotated with `@AirCycle` that are defined in an Activity will receive lifecycle callbacks of the enclosing Activity. 
 The Activity does NOT need to implement any interface or extend any specific base class.

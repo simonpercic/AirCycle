@@ -233,6 +233,15 @@ dependencies {
 }
 ```
 
+Since Android Gradle Plugin version 2.2.0
+```groovy
+dependencies {
+    compile 'com.github.simonpercic:aircycle:1.1.0'
+    annotationProcessor 'com.github.simonpercic:aircycle-compiler:1.1.0'
+}
+```
+
+
 ## Inspiration and motivation
 Inspired by [SoundCloud's](https://developers.soundcloud.com/blog/category/mobile) [LightCycle](https://github.com/soundcloud/lightcycle) library. Kudos to those guys.
 

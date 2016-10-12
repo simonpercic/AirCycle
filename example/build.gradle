@@ -1,16 +1,5 @@
-buildscript {
-    repositories {
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'si.dlabs.soter'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -70,8 +59,8 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     compile project(':aircycle-api')
 
-    apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
-    apt project(':aircycle-compiler')
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    annotationProcessor project(':aircycle-compiler')
 
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"

@@ -4,14 +4,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'si.dlabs.soter'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
@@ -77,9 +75,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile project(':aircycle-api')
 
-    apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
-    apt "com.google.dagger:dagger-compiler:$daggerVersion"
-    apt project(':aircycle-compiler')
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor project(':aircycle-compiler')
 
     provided 'javax.annotation:javax.annotation-api:1.2'
 

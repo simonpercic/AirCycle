@@ -192,6 +192,42 @@ AirCycleDefaultConfig.setConfig(airCycleConfig);
 ### Configuration options
 - `passIntentBundleOnCreate(true|false)` if true, it passes the Activity's starting Intent Extras Bundle only if its savedInstanceState is null in onCreate(), i.e. getIntent().getExtras() with null-checks. If false, it always passes the savedInstanceState. Defaults to `false`. 
 
+- `ignoreLifecycleCallback(int)` ignore an Activity lifecycle callback. Pass an `ActivityLifecycleEvent` IntDef from [ActivityLifecycle](aircycle-api/src/main/java/com/github/simonpercic/aircycle/ActivityLifecycle.java)'s constants.
+
+
+## Ignore Activity lifecycle callbacks
+There are 3 options to ignore lifecycle callbacks:
+
+- `@AirCycle` annotation option `ignore`:
+```java
+@AirCycle(ignore = {ActivityLifecycle.RESUME, ActivityLifecycle.PAUSE}) ActivityAirCycleLogger airCycleLogger;
+```
+
+- annotate a listener method with `@Ignore`:
+```java
+public class CustomListener {
+
+    // ...
+
+    @Ignore
+    public void onStart() {
+    
+    }
+
+    // ...
+}
+```
+
+- `AirCycleConfig` configuration option: 
+```java
+AirCycleConfig airCycleConfig = AirCycleConfig.builder()
+    // ...
+    .ignoreLifecycleCallback(ActivityLifecycle.RESUME)
+    .ignoreLifecycleCallback(ActivityLifecycle.PAUSE)
+    // ...
+    .build();
+```
+
 
 ## How does it work?
 AirCycle generates one binding class per-Activity containing 1 or more `@AirCycle` annotated field(s). 
@@ -228,16 +264,16 @@ buildscript {
 apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
-    compile 'com.github.simonpercic:aircycle:1.1.0'
-    apt 'com.github.simonpercic:aircycle-compiler:1.1.0'
+    compile 'com.github.simonpercic:aircycle:1.2.0'
+    apt 'com.github.simonpercic:aircycle-compiler:1.2.0'
 }
 ```
 
 Since Android Gradle Plugin version 2.2.0
 ```groovy
 dependencies {
-    compile 'com.github.simonpercic:aircycle:1.1.0'
-    annotationProcessor 'com.github.simonpercic:aircycle-compiler:1.1.0'
+    compile 'com.github.simonpercic:aircycle:1.2.0'
+    annotationProcessor 'com.github.simonpercic:aircycle-compiler:1.2.0'
 }
 ```
 
